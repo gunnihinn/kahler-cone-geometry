@@ -1,0 +1,1267 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[pdftex]{hyperref}
+\usepackage{setspace}
+\setstretch{1.1}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+
+\title{Curvature of K\"{a}hler moduli}
+\author{Gunnar Þór Magnússon}
+
+\newtheorem{theo}{Theorem}[section]
+\newtheorem{prop}[theo]{Proposition}
+\newtheorem{coro}[theo]{Corollary}
+\newtheorem{lemm}[theo]{Lemma}
+\newtheorem*{theo*}{Theorem}
+\theoremstyle{definition}
+\newtheorem*{defi}{Definition}
+\newtheorem{exam}[theo]{Example}
+\theoremstyle{remark}
+\newtheorem*{rema}{Remark}
+
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+
+\newcommand{\End}{\mathop{\mathrm{End}}}
+\newcommand{\Aut}{\mathop{\mathrm{Aut}}}
+\newcommand{\id}{\mathop{\mathrm{id}}}
+\newcommand{\Vol}{\mathop{\mathrm{Vol}}}
+\def\Im{\mathop{\rm Im}}
+
+\def\ov#1{\overline{#1}}
+
+\def\half{\tfrac12}
+\def\onfo{\tfrac14}
+
+\def\E#1{\coho{#1,#1}}
+
+%% Operators
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Hom}{Hom}
+\def\d{\partial}
+\def\dbar{\bar\partial}
+
+\def\p{\times}
+
+%% Inner product
+\def\llangle{\langle\!\langle}
+\def\rrangle{\rangle\!\rangle}
+
+%% Cohomology groups
+\def\coho#1{\mathrm{H}^{#1}}
+
+%% Connection and curvature
+\def\levi{\nabla}
+\newcommand{\levicivita}[1]{
+d#1
+-\tfrac12 g(d\kf, \kf) \cdot #1
+-\tfrac12 g(#1, \kf) \cdot d\kf
++\tfrac12 \Lambda(#1 \wedge d\kf)
+}
+\newcommand{\Levicivita}[2]{
+d_{#1}#2
+-\tfrac12 g(#1, \kf) \cdot #2
+-\tfrac12 g(#2, \kf) \cdot #1
++\tfrac12 \Lambda(#2 \wedge  #1)
+}
+\def\chern{D}
+\def\conn{\nabla}
+\def\curv{\tfrac{i}{2\pi}\Theta}
+
+%% Intersection products with a Kahler form
+\def\q#1{\frac{1}{\Vol}\int_X #1 \wedge \kf\^{n-1}}
+\def\qq#1#2{\frac{1}{\Vol}\int_X #1 \wedge #2 \wedge \kf\^{n-2}}
+\def\qqq#1#2#3{\frac{1}{\Vol}\int_X #1 \wedge #2 \wedge #3 \wedge \kf\^{n-3}}
+\def\qqqq#1#2#3#4{\frac{1}{\Vol}\int_X #1 \wedge #2 \wedge#3 \wedge#4 \wedge \kf\^{n-4}}
+
+%% The K\"{a}hler form and class of a Hermitian metric
+\def\kf{\omega}
+\def\ckf{\alpha}
+\def\Lef{\Lambda}
+
+%% Vertical and horizontal vectors
+\def\ver#1{#1^{\mathrm{V}}}
+\def\hor#1{#1^{\mathrm{H}}}
+
+%% Tangent vectors in K\"{a}hler cone
+\def\ton{u}
+\def\ttw{v}
+\def\tth{z}
+\def\tfo{w}
+
+%% Algebra power
+\def\^#1{^{[#1]}}
+
+%% K\"{a}hler cones
+\def\KC{C}
+\def\CKC{\mathbb{C}C}
+\def\RKC{\mathcal{\KC}}
+
+\begin{document}
+
+\begin{abstract}
+The K\"{a}hler cone of a compact Kahler manifold carries a natural
+Riemannian metric, given by the intersection product of its cohomology
+ring. We give cohomological expressions for the geodesics, Levi-Civita
+connection and curvature tensor of this metric, show that any two points
+in the cone can be joined by a geodesic, and determine when the metric
+is complete.
+\end{abstract}
+
+\maketitle
+
+
+
+\section*{Introduction}
+
+Let $X$ be a compact K\"{a}hler manifold of complex dimension $n$. The
+Kahler cone of $X$ is the set of Kahler classes, that is,
+$(1,1)$-classes that contain a Kahler metric. Each Kahler class defines
+an inner product on the space of $(1,1)$-classes and letting the classes
+vary defines a natural Riemannian metric on the Kahler cone. 
+
+This metric has been studied by Wilson~\cite{Wilson}, Wilson and
+Trenner~\cite{WilsonTrenner} and myself~\cite{Magnusson}, mostly by
+embedding the Kahler cone into the space of smooth Hermitian metrics on
+the manifold via the Aubin--Calabi--Yau theorem and using the natural
+$L^2$ metric defined on that infinite-dimensional space. See also
+Huybrechts~\cite{Huybrechts} for another similar approach to the Kahler
+cone. 
+
+Working in this fashion one can calculate the curvature tensor of
+the metric, but the expression this yields does not descend again to the
+level of cohomology, most fundamentally because the wedge product of
+harmonic forms is generally not harmonic.  The resulting expressions are
+also a bit hard to work with, for example if one wants to calculate any
+of the derived curvatures of the metric or try to estimate the curvature
+tensor. This is reflected in that the most complete and interesting
+results that have been obtained on the curvature this metric have in
+fact been proven by working in the cohomology ring in special cases like
+on complex tori, compact surfaces or Calabi--Yau threefolds; see
+\cite{Wilson,WilsonTrenner}.
+
+In this paper we treat the Aubin--Calabi--Yau theorem and actual Kahler
+metrics as red herrings and work entirely within the cohomology ring of
+our manifold. This shifts the difficulty of the problem from dealing
+with wild differential forms to calculating various cup products in the
+cohomology ring. Those products turn out to be much more manageable than
+the differential forms and yield very satisfying results. For example,
+we're able to give explicit formulas for the geodesics of the metric
+(Theorem~\ref{theo:geodesics}) and say when it is complete, calculate
+that its
+Levi-Civita connection is
+$$
+\conn_{\ton} \ttw
+= d_{\ton} \ttw 
+- \half \Lef(\ton) \ttw 
+- \half \Lef(\ttw) \ton
++ \half \Lef(\ton \cup \ttw)
+$$
+(see Proposition~\ref{prop:connection}) and calculate that the curvature
+tensor is
+$$
+R(\ton,\ttw,\tth,\tfo)
+=
+- \onfo \langle \Lef(\ton \cup \tfo), \Lef(\ttw \cup \tth) \rangle
++ \onfo \langle \Lef(\ton \cup \tth), \Lef(\ttw \cup \tfo) \rangle
+$$
+(see Theorem~\ref{theo:curvature} and the remark following it for a
+natural way to express the curvature tensor as a perturbation of a
+tensor of constant negative sectional curvature).  These formulas show
+very clearly why the differential form approaches do not give totally
+satisfying results, because the curvature involves cup products of
+$(1,1)$-classes where attempts to represent them with harmonic forms
+fail.
+
+
+\section{The K\"{a}hler cone}
+
+Let $X$ be a compact K\"{a}hler manifold of dimension $\dim_{\CC} X = n$.
+
+\begin{defi}
+The \emph{K\"{a}hler cone} of $X$ is the set
+\begin{equation*}
+C(X) = \{ \kf \in \coho{1,1}(X,\RR) 
+\mid
+\text{$\kf$ contains a K\"{a}hler metric}
+\}.
+\end{equation*}
+\end{defi}
+
+If there can be no confusion about the underlying manifold $X$, we'll
+just write $\KC$ for its K\"{a}hler cone.  As the name suggests, this is
+an open cones in the finite-dimensional vector space
+$\coho{1,1}(X,\RR)$. The K\"{a}hler cone is the trancendental analogue
+of the ample cone of a projective variety. It is described by the the
+trancendental version of the Nakai--Moishezon criteria due to Demailly
+and Paun~\cite{DemaillyPaun}:
+
+
+\begin{theo}
+The K\"{a}hler cone of $X$ is a connected component of the set of real
+$(1,1)$-cohomology classes that are numerically positive on analytic
+cycles, that is, classes $\alpha$ such that $\int_{Z} a^p > 0$ for every
+irreducible analytic set $Z$ in $X$ of dimension $p$.
+\end{theo}
+
+
+
+Since the K\"{a}hler cone $\KC$ is an open set in a real vector space,
+we can view it as a smooth manifold in its own right. It is in fact
+naturally a Riemannian manifold, because each Kahler class defines an
+inner product on the Kahler cone, and these inner products vary smoothly
+with the underlying class.
+
+
+Let's agree on some notation before we find conventient expressions for
+this metric. If $x$ is an element of the cohomology ring of $X$, we
+write $x\^k := x^k/k!$ for all $k \geq 0$. This notation is
+quite convenient for calculations with Kahler forms in the cohomology
+ring of $X$; I learned it from Georg Schumacher.
+
+
+\begin{prop}
+Let $\ton,\ttw$ be elements of $T_{\kf}C$. The Riemannian metric on $C$
+can be defined in any of the following ways.
+\begin{enumerate}
+    \item
+\hfil
+$
+\langle \ton, \ttw \rangle
+= \Lef(\ton)\Lef(\ov\ttw)
+- \Lef\^2(\ton\wedge\ov\ttw).
+$
+\hfil
+    \item 
+$
+\hfil
+\langle\ton, \ttw \rangle
+= 
+\frac{1}{\Vol} \langle\!\langle \hat\ton, \hat\ttw \rangle\!\rangle,
+%\frac{1}{\Vol} \int_X \hat\ton \wedge {\hat\kf}\^{n-1}
+%\frac{1}{\Vol} \int_X \hat\ttw \wedge {\hat\kf}\^{n-1}
+%- \frac{1}{\Vol} \int_X \hat\ton \cup \hat\ttw \wedge {\hat\kf}\^{n-2},
+\hfil
+$
+
+\noindent
+where the right-hand side is the $L^2$ inner product defined by a Kahler
+metric in $\kf$ and $\hat\ton,\hat\ttw$ are the are the harmonic
+representatives of $\ton, \ttw$.
+
+    \item
+The metric is the quadradic form defined by the Hessian of $-\Vol$.
+\end{enumerate}
+\end{prop}
+
+
+\begin{proof}
+That $(1)$ and $(2)$ define the same quadradic form is a simple
+calculation based on the adjoint property of $\Lef$, and that $(1)$
+agrees with the inner product that $\kf$ defines can be seen by taking
+the primitive decomposition of $\ton$ and $\ttw$, plugging it into $(1)$
+and calculating until the Hodge--Riemann bilinear relations say that we
+have the correct inner product.
+
+Note that we can view $\kf$ as the tautological section $C \to T_C$
+associated to the tangent bundle of any open set in a vector space.
+Then $d_{\ttw} \Vol = -\Lef(\ttw)$ as we see by considering
+$\Lef(\ttw) \kf\^n = \ttw \cup \kf\^{n-1}$. Similarly, we find that
+$\operatorname{Hess}(\ton,\ttw) \Vol 
+= d_{\ton} d_{\ttw}\Vol = \langle \ton, \ttw \rangle$ by comparing with
+$(1)$.
+\end{proof}
+
+
+
+
+
+\section{Geodesics and completeness}
+
+
+\begin{theo}
+\label{theo:geodesics}
+Let $\kf$ be a point in $C$ and let $x \in T_{\kf} C$. Decompose $x =
+\Lef(x) \, \kf + u$, where $u = x - \frac{1}{n}\Lef(x)\,\kf$ is
+primitive with respect to $\kf$.  The geodesic $\gamma$ that satisfies
+$\gamma(0) = \kf$ and $\gamma'(0) = x$ is
+$$
+\gamma(t)
+= \Vol(\kf)^{1/n} e^{\Lef(x)t} \frac{\kf + t u}{\Vol(\kf + t u)^{1/n}}
+$$
+for $|t|$ small enough so that $\kf + tu \in C$.
+\end{theo}
+
+
+\begin{proof}
+We invite the reader to check that $\gamma(0) = \kf$ and $\gamma'(0) =
+x$. Now consider the splitting $C \to \RR \times C_1$, $x \mapsto
+(\log \Vol(x), x/\Vol(x)^{1/n})$, where $C_1$ is the set of Kahler classes of
+volume one. This splitting is an isometry if we give $\RR$ its usual
+flat metric and $C_1$ the metric induced by restriction. Our $\gamma$
+maps to $(\frac{1}{n}\log \Vol(\kf) + \Lef(x) t, (\kf + t u)/\Vol(\kf + t u)^{1/n})$ under
+the splitting, so we can check that each factor is a geodesic
+separately. The factor in $\RR$ clearly is so.
+
+Consider thus the two ordinary differential equations
+\begin{align}
+\label{eq:geodesic}
+\conn_{\gamma'(t)} \gamma'(t) &= 0,
+\qquad \gamma(0) = \kf,\quad \gamma'(t) = u
+\\
+\label{eq:fixedvol}
+\gamma'(t) \cup \gamma(t)\^{n-1} &= 0,
+\qquad \gamma(0) = \kf,\quad \gamma'(t) = u
+\end{align}
+where we assume $\kf$ has volume one and $u$ is primitive with respect
+to $\kf$. The first is of course the geodesic equation in $C_1$. The
+second is obtained by differentiating the equation $\Vol(\gamma(t)) = 1$
+and says that $\gamma'(t)$ should always be primitive with respect to
+$\gamma(t)$.
+
+We now claim that any geodesic of $C_1$ satisfies \eqref{eq:fixedvol}.
+This is clear, because if $\gamma(t)$ is a geodesic in $C_1$, then
+$\gamma'(t) \in T_{\gamma(t)} C_1$ for all $t$, and the tangent space of
+$C_1$ at $\gamma(t)$ is exactly the set of classes that are primitive
+with respect to $\gamma(t)$. By the uniqueness of solutions to ordinary
+differential equtions, the equations \eqref{eq:geodesic} and
+\eqref{eq:fixedvol} thus have the same solutions.
+
+Now, given $u \in T_{\kf} C_1$ we consider the curve $\gamma(t) = (\kf +
+tu)/v(t)^{1/n}$, where we write $v(t) = \Vol(\kf + tu)$ for short. It
+is in $C_1$ for all small enough $t$ by construction. We have
+$$
+v(t)
+= \sum_{k=0}^n \Lef\^{k}(u^k) \, t\^k
+= 1 + \Lef\^{2}(u^2) \, \tfrac12 t^2 + O(t^3),
+$$
+where $\Lef$ is the adjoint Lefschetz operator associated to $\kf$. Thus
+$v(0)=1$ and $v'(0)=0$. Then
+$$
+\gamma'(t) = \frac{u}{v(t)^{1/n}} - \frac{v'(t)}{n v(t)} \gamma(t)
+$$
+so $\gamma(0) = \kf$ and $\gamma'(0) = u$. The curve $\gamma$ is thus a
+solution of \eqref{eq:fixedvol}, which means that it is also the geodesic 
+that passes through $\kf$ in the direction of $u$. We finally remark
+that $\gamma(t)$ is defined for all $t$ such that the volume of $\kf +
+tu$ is positive.
+\end{proof}
+
+
+\begin{coro}
+Any two points in $C$ can be joined by a geodesic. 
+\end{coro}
+
+
+
+\begin{coro}
+The geodesic completion of the Kahler cone is a connected component of
+the cone of classes of positive volume.
+\end{coro}
+
+\begin{proof}
+Let $\kf$ be a point in $C$. Given any vector $x \in T_{\kf}C$ we can
+construct a geodesic $\gamma$ that departs from $\kf$ in the direction
+of $x$ and is defined as long as $\Vol(\gamma)$ is neither $0$ nor
+$\infty$. Given any such class, we can also explicitly construct a
+geodesic that starts at $\kf$ and tends towards it.
+\end{proof}
+
+
+\subsection*{Pullbacks}
+
+A holomorphic map $f : X \to Y$ between compact K\"{a}hler manifolds induces
+a morphism $f^* : \coho{*}(Y,\RR) \to \coho{*}(X,\RR)$ in cohomology
+that respects the Hodge decomposition. However, if $\kf$ is a K\"{a}hler
+class on $Y$, then $f^*\kf$ is hardly ever a K\"{a}hler class on $X$. This
+happens mostly if $f$ is either an embedding or a finite covering map.
+
+\begin{prop}
+Let $f : X \to Y$ be a finite surjective morphism. Let $g_X$ and $g_Y$
+be the metrics on the K\"{a}hler cones of $X$ and $Y$, respectively.
+Then the pullback morphism $f^* : \KC(Y) \to \KC(X)$ is a Riemannian
+embedding.
+\end{prop}
+
+\begin{proof}
+Let $\ckf$ be a point in $\KC(Y)$ and $\kf = \Im \ckf$. The volume of
+$X$ with respect to $f^*\kf$ is
+\begin{equation*}
+  \Vol(X,f^*\kf) = p \, \Vol(Y,\kf)
+\end{equation*}
+as $f$ is finite of degree $p$. It follows that $f^*$ is an embedding.
+\end{proof}
+
+\begin{coro}
+The group $\Aut X$ of holomorphic automorphisms of $X$ acts by
+isometries on the K\"{a}hler cone $\KC(X)$.
+\end{coro}
+
+A closer look reveals that this last statement contains less information
+than first meets the eye. The automorphism group $\Aut X$ of a compact
+complex manifold is a Lie group and it splits roughly into two parts; a
+positive-dimensional group given by the flows of holomorphic vector
+fields, or elements of $\coho{0}(X,T_X)$, and a discrete part consisting of
+``other'' automorphisms. The isomorphisms generated by vector fields act
+trivially on the cohomology ring of $X$, so the only part of $\Aut X$
+that possibly acts by nontrivial isometries on $\KC(X)$ is discrete.
+
+
+
+
+
+\section{The Levi-Civita connection}
+
+The Levi-Civita connection is the unique connection on the tangent
+bundle that's compatible with the metric and is torsion-free. That is,
+it satisfies
+$$
+d g(\ton, \ttw) 
+= g(\levi \ton, \ttw) + g(\ton, \levi \ttw),
+\quad
+\levi_{\ton}\ttw - \levi_{\ttw}\ton = [\ton,\ttw]
+$$
+for all sections $\ton, \ttw$ of the bundle.
+
+\begin{lemm}
+Let $\ton,\ttw,\tth$ be $(1,1)$-classes. 
+\begin{itemize}
+    \item
+$\langle \Lef(\ton\cup\ttw), \tth \rangle
+= - \Lef\^3(\ton \cup \ttw \cup \tth) \,\kf\^n
++ \Lef\^2(\ton \cup \ttw) \Lef(\tth) \,\kf\^n$.
+    \item 
+$\Lef\^3(\ton \cup \ttw \cup \tth)
+= \Lef\^2(\ton \cup \Lef(\ttw \cup \tth))
+- \Lef(\ton) \Lef\^2(\ttw \cup \tth)$.
+\end{itemize}
+\end{lemm}
+
+
+\begin{proof}
+First note that if $\tth$ is a $(1,1)$-class, then $\tth = (\tth -
+\frac1n \Lef(\tth)\kf) + \frac1n \Lef(\tth) \kf$ is its primitive
+decomposition. Then
+\begin{align*}
+* \tth 
+&= -(\tth - \tfrac1n \Lef(\tth)\kf) \cup \kf\^{n-2}
++ \tfrac1n \Lef(\tth) \kf\^{n-1}
+\\
+&= -\tth \cup \kf\^{n-2}
++ \tfrac{n-1}{n} \Lef(\tth) \kf\^{n-1}
++ \tfrac1n \Lef(\tth) \kf\^{n-1}
+\\
+&= -\tth \cup \kf\^{n-2} + \Lef(\tth)\, \kf\^{n-1},
+%% and
+\\
+*(\kf \cup \tth)
+&= *( \kf \cup (\tth - \tfrac1n \Lef(\tth)\kf))
++ * \Bigl( \tfrac{2}{n} \Lef(\tth) \kf\^2 \bigr)
+\\
+&= -(\tth - \tfrac1n \Lef(\tth)\kf) \cup \kf\^{n-3}
++ \tfrac{2}{n} \Lef(\tth) \kf\^{n-2}
+\\
+&= -\tth \cup \kf\^{n-3}
++ \tfrac{n-2}{n} \Lef(\tth) \kf\^{n-2}
++ \tfrac{2}{n} \Lef(\tth) \kf\^{n-2}
+\\
+&= -\tth \cup \kf\^{n-3}
++ \Lef(\tth)\, \kf\^{n-2}.
+\end{align*}
+We now get
+\begin{align*}
+\langle \Lef(\ton \cup \ttw), \tth \rangle \,\kf\^n
+&= \langle \ton \cup \ttw, \kf \cup \tth \rangle \,\kf\^n
+\\
+&= \ton \cup \ttw \cup 
+(-\tth \cup \kf\^{n-3} + \Lef(\tth)\, \kf\^{n-2})
+\\
+&= - \Lef\^3(\ton \cup \ttw \cup \tth) \,\kf\^n
++ \Lef\^2(\ton \cup \ttw) \Lef(\tth) \,\kf\^n
+\end{align*}
+on the one hand, which gives the first result. On the other, we have
+\begin{align*}
+\langle \Lef(\ton \cup \ttw), \tth \rangle \,\kf\^n
+&= \Lef(\ton \cup \ttw) \cup 
+(-\tth \cup \kf\^{n-2} + \Lef(\tth)\, \kf\^{n-1})
+\\
+&= - \Lef\^2(\Lef(\ton \cup \ttw) \cup \tth) \,\kf\^{n}
++ 2 \Lef\^2(\ton \cup \ttw) \Lef(\tth) \,\kf\^{n},
+\end{align*}
+whence we deduce the second.
+\end{proof}
+
+
+\begin{prop}
+\label{prop:connection}
+The Levi-Civita connection of the Riemannian metric $g$ on $\KC$ is
+$$
+\levi_{\tth} \ton
+=
+d_u \tth
+-\tfrac12 \Lef(\ton) \tth
+-\tfrac12 \Lef(\tth) \ton
++\tfrac12 \Lef(\ton \cup \tth).
+$$
+\end{prop}
+
+\begin{proof}
+The metric is defined by
+$$
+\langle \ton, \ttw \rangle
+= \Lef \ton \, \Lef \ttw
+- \Lef\^2(\ton \cup \ttw).
+$$
+We have $d_{\tth}(\Lef\ton) = \Lef(d_{\tth}\ton) -\langle
+\ton,\tth\rangle$ by direct calculation.  Writing
+$$
+\Lef\^2(\ton \cup \ttw)
+= \frac{1}{\Vol}\int_X \ton\cup\ttw\cup\kf\^{n-2}
+$$
+we find that
+$$
+d_{\tth}(\Lef\^2(\ton \cup \ttw))
+= -\Lef(z) \, \Lef\^2(\ton \cup \ttw)
++ \Lef\^2(d_{\tth} \ton \cup \ttw)
++ \Lef\^2(\ton \cup d_{\tth} \ttw)
++ \Lef\^3(\ton \cup \ttw \cup \tth),
+$$
+so
+$$
+\displaylines{
+d_{\tth} \langle \ton, \ttw \rangle
+=
+\bigl(\Lef(d_{\tth}\ton) -\langle \ton,\tth\rangle\bigr) \Lef(\ttw)
++
+\Lef(\ton)\bigl(\Lef(d_{\tth}\ttw) -\langle \ttw,\tth\rangle\bigr)
+\hfill\cr\hfill{}
++ \Lef(\tth) \, \Lef\^2(\ton \cup \ttw)
+- \Lef\^2(d_{\tth} \ton \cup \ttw)
+- \Lef\^2(\ton \cup d_{\tth} \ttw)
+- \Lef\^3(\ton \cup \ttw \cup \tth)
+\cr{}
+\phantom{d_{\tth} \langle \ton, \ttw \rangle}
+= \langle d_{\tth} \ton, \ttw \rangle
++ \langle \ton, d_{\tth} \ttw \rangle
+- \langle \ton,\tth\rangle\, \Lef(\ttw)
+- \Lef(\ton) \, \langle \ttw,\tth\rangle
+\hfill
+\cr\hfill{}
++ \Lef(\tth) \, \Lef\^2(\ton \cup \ttw)
+- \Lef\^3(\ton \cup \ttw \cup \tth).
+}
+$$
+The first two terms here are nice and we hope to mold the rest into
+a connection. Being greedy, we'll take all the remaining terms and try
+to fit them into the $\langle \conn_{\tth} \ton, \ttw \rangle$ mold. If
+we're lucky, what comes out will have some symmetry so we can conclude
+that what we've made is in fact $2$ times the missing part of our
+connection. We first write
+$$
+\displaylines{
+- \langle \ton,\tth\rangle\, \Lef(\ttw)
+- \Lef(\ton) \, \langle \ttw,\tth\rangle
++ \Lef(z) \, \Lef\^2(\ton \cup \ttw)
+- \Lef\^3(\ton \cup \ttw \cup \tth)
+\hfill\cr\hfill{}
+= 
+- \langle \Lef(\ton) \tth, \ttw \rangle
+- \langle \Lef(\tth) \ton, \ttw \rangle
++ \Lef(\ton)\,\Lef\^2(\ttw \cup \tth)
+- \Lef\^3(\ton \cup \ttw \cup \tth)
+}
+$$
+by expanding the definition of $\langle \ttw, \tth \rangle$. Using
+Lemma~\ref{lemm:triangle} we now find that
+\begin{align*}
+\Lef\^3(\ton \cup \ttw \cup \tth)\, \kf\^n
+&= L\^{n-3}(\ttw \cup \tth) \cup \ton
+\\
+&= L\^{n-2}(\Lef(\ttw \cup \tth) 
+- \tfrac{1}{n-1}L\Lef\^2(\ttw\cup\tth)) \cup \ton
+\\
+&= \bigl(\Lef\^{2}(\Lef(\ttw \cup \tth) \cup \ton)
+- \Lef\^2(\ttw\cup\tth) \Lef(\ton)\bigr)\kf\^n.
+\end{align*}
+Then
+$$
+\displaylines{
+\Lef(\ton)\, \Lef\^2(\ttw \cup \tth)
+- \Lef\^3(\ton \cup \ttw \cup \tth)
+\hfill\cr\hfill{}
+\begin{aligned}
+&=
+\Lef(\ton)\,\Lef\^2(\ttw \cup \tth)
+- \Lef\^2(\Lef(\ttw \cup \tth) \cup \ton)
++ \Lef\^2(\ttw\cup\tth) \Lef(\ton)
+\\
+&=
+\Lef(\ton)\,\Lef( \Lef(\ttw \cup \tth))
+- \Lef\^2(\Lef(\ttw \cup \tth) \cup \ton)
+= \langle \ton, \Lef(\ttw \cup \tth) \rangle
+\end{aligned}
+}
+$$
+because $2\Lef\^2 = \Lef^2$. In conclusion, we've found that
+$$
+\displaylines{
+- \langle \ton,\tth\rangle\, \Lef(\ttw)
+- \Lef(\ton) \, \langle \ttw,\tth\rangle
++ \Lef(z) \, \Lef\^2(\ton \cup \ttw)
+- \Lef\^3(\ton \cup \ttw \cup \tth)
+\hfill\cr\hfill{}
+= 
+- \langle \Lef(\ton) \tth, \ttw \rangle
+- \langle \Lef(\tth) \ton, \ttw \rangle
++ \langle \ton, \Lef(\ttw \cup \tth) \rangle.
+}
+$$
+Here the left-hand side is symmetric in $u, v$, so the right-hand side
+must also be symmetric in them. Splitting the left-hand side into two
+halves, we then get that
+$$
+\displaylines{
+d_{\tth} \langle \ton, \ttw \rangle
+= \langle d_{\tth} \ton, \ttw \rangle
+-\tfrac12 \langle \Lef(\ton) \tth, \ttw \rangle
+-\tfrac12 \langle \Lef(\tth) \ton, \ttw \rangle
++\tfrac12 \langle \Lef(\ton \cup \tth), \ttw \rangle
+\hfill\cr\hfill{}
++ \langle \ton, d_{\tth} \ttw \rangle
+-\tfrac12 \langle \ton, \Lef(\ttw) \tth \rangle
+-\tfrac12 \langle \ton, \Lef(\tth) \ttw \rangle
++\tfrac12 \langle \ton, \Lef(\ttw \cup \tth) \rangle
+\cr{}
+\phantom{d_{\tth} \langle \ton, \ttw \rangle}
+= \langle d_{\tth} \ton
+- \tfrac12\Lef(\ton) \tth
+- \tfrac12\Lef(\tth) \ton
++ \tfrac12\Lef(\ton \cup \tth), \ttw \rangle
+\hfill\cr\hfill{}
++ \langle \ton, d_{\tth} \ttw
+- \tfrac12\Lef(\ttw) \tth
+- \tfrac12\Lef(\tth) \ttw
++ \tfrac12\Lef(\ttw \cup \tth) \rangle
+\cr{}
+\phantom{d_{\tth} \langle \ton, \ttw \rangle}
+= \langle \conn_{\tth} u, v \rangle
++ \langle u, \conn_{\tth} v \rangle
+\hfill
+}
+$$
+as promised. It is now clear that $\conn_{\ton} \ttw - \conn_{\ttw} \ton
+= [\ton, \ttw]$, so $\conn$ is the Leci-Civita connection of the metric.
+\end{proof}
+
+
+\begin{lemm}
+\label{lemm:triangle}
+The triangle
+$$
+\begin{tikzpicture}[auto]
+\node (UL) {$\coho{2,2}(X,\CC)$};
+\node (UR) [right of=UL,node distance=120pt] {$\coho{n-1,n-1}(X,\CC)$};
+\node (DR) [below of=UR,node distance=40pt] {$\coho{1,1}(X,\CC),$};
+\draw [->] (UL) edge node {\small$L\^{n-3}$} (UR);
+\draw [->] (UL) edge node[below] {\small$\phi$} (DR);
+\draw [->] (DR) edge node[right] {\small$L\^{n-2}$} (UR);
+\end{tikzpicture}
+$$
+where $\phi(x) = \Lef x - \frac{1}{n-1} \Lef\^2 x \, \kf$, is
+commutative.
+\end{lemm}
+
+
+\begin{proof}
+This can be verified by a direct calculation once we remember that
+$[L\^{n-2},\Lef] = L\^{n-3}$ on $4$-classes.
+\end{proof}
+
+
+\begin{coro}
+\label{coro:kahlerform}
+\begin{itemize}
+    \item 
+$\levi \kf = 0$.
+    \item 
+If $\ton$ is a primitive vector field, then $\levi \ton$ is also
+primitive.
+\end{itemize}
+\end{coro}
+
+
+
+
+
+
+\section{The curvature tensor}
+
+
+
+\begin{theo}
+\label{theo:curvature}
+The curvature tensor of the metric on the Kahler cone is
+\begin{equation*}
+R(\ton,\ttw,\tth,\tfo)
+= 
+- \onfo \langle \Lef(\ton \cup \tfo), \Lef(\ttw \cup \tth) \rangle
++ \onfo \langle \Lef(\ton \cup \tth), \Lef(\ttw \cup \tfo) \rangle.
+\end{equation*}
+\end{theo}
+
+
+\begin{proof}
+We may assume that all the tangent fields $\ton,\ttw,\tth,\tfo$ are
+primitive, either by appealing to the isometric splitting of the Kahler
+cone, by using that $\conn \kf = 0$ and the symmetries of the curvature
+tensor to see that $R$ always degenerates to the primitive parts of our
+classes, or by calculating the curvature tensor first for primitive
+classes and then doing painful algebra to see that the general case
+degenerates to that one. However we do it, we find that for primitive
+fields we have
+$$
+\conn_{\ttw} \tth
+= d_{\ttw} \tth + \half \Lef(\ttw \cup \tth)
+$$
+and
+$$
+\displaylines{
+\conn_{\ton} \conn_{\ttw} \tth
+= d_{\ton} d_{\ttw} \tth 
++ \half (d_{\ton} \Lef)(\ttw \cup \tth)
++ \half \Lef(d_{\ton} \ttw \cup \tth)
+\hfill\cr\hfill{}
++ \half \Lef(\ttw \cup d_{\ton} \tth)
++ \half \Lef(\ton \cup d_{\ttw} \tth)
++ \onfo \Lef(\ton \cup \Lef(\ttw \cup \tth)).
+}
+$$
+This gives
+$$
+R(\ton,\ttw) \tth
+= 
+\half (d_{\ton} \Lef)(\ttw \cup \tth)
++ \onfo \Lef(\ton \cup \Lef(\ttw \cup \tth))
+- \half (d_{\ttw} \Lef)(\ton \cup \tth)
+- \onfo \Lef(\ttw \cup \Lef(\ton \cup \tth))
+$$
+since the other terms either make up $\conn_{[\ton,\ttw]}\tth$ or are
+symmetric in $\ton,\ttw$. To make sense of this, it's convenient to take
+the inner product with $\tfo$.
+
+We have $*(\kf \cup \tfo) = -\kf\^{n-3} \cup \tfo$ since $\tfo$ is
+primitive, so 
+$$
+\langle \Lef(\ttw \cup \tth), \tfo \rangle
+= \langle \ttw \cup \tth, \kf \cup \tfo \rangle
+= -\Lef\^3(\ttw \cup \tth \cup \tfo).
+$$
+Differentiating this in the direction of $\ton$ gives
+$$
+\displaylines{
+\langle (d_{\ton}\Lef)(\ttw \cup \tth), \tfo \rangle
++ \half \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
++ \half \langle \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
+\hfill\cr\hfill{}
+= 
+%-\Lef(\ton) \Lef\^3(\ttw \cup \tth \cup \tfo)
+-\Lef\^4(\ton \cup \ttw \cup \tth \cup \tfo)
+}
+$$
+after canceling out the terms that involve the derivatives of the
+tangent fields. Then one part of the curvature tensor is
+$$
+\displaylines{
+\half \langle (d_{\ton}\Lef)(\ttw \cup \tth), \tfo \rangle
++ \onfo \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
+\hfill\cr\hfill{}
+%- \half \Lef\^4(\ton \cup \ttw \cup \tth \cup \tfo)
+%- \onfo \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
+%\cr\hfill{}
+%- \onfo \langle \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
+%+ \onfo \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
+%\cr{}
+=- \half \Lef\^4(\ton \cup \ttw \cup \tth \cup \tfo)
+- \onfo \langle \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle.
+}
+$$
+The first term is symmetric in $\ton,\ttw$, so we get
+$$
+R(\ton,\ttw,\tth,\tfo)
+= 
+- \onfo \langle \Lef(\ton \cup \tfo), \Lef(\ttw \cup \tth) \rangle
++ \onfo \langle \Lef(\ton \cup \tth), \Lef(\ttw \cup \tfo) \rangle
+$$
+as promised.
+\end{proof}
+
+
+\begin{lemm}
+Let $x,\ttw,\tth,\tfo$ be tensor fields and suppose that $x,\ttw,\tth$
+are primitive. Then
+$$
+\displaylines{
+\langle (d_x \Lef) (\ttw \cup \tth), \tfo \rangle
+= -\Lef\^4(x \cup \ttw \cup \tth \cup \tfo)
+- \half \langle \Lef(\ttw \cup \tth), \Lef(x \cup \tfo) \rangle
+\hfill\cr\hfill{}
+- \half \langle x \cup \Lef(\ttw \cup \tth), \tfo \rangle
+- \half \langle \Lef(\ttw \cup \tth), x \rangle \Lef(\tfo),
+\cr{}
+\langle (\conn_{x} \Lef) (\ttw \cup \tth), \tfo \rangle
+= -\Lef\^4(x \cup \ttw \cup \tth \cup \tfo)
+- \half \langle \Lef(\ttw \cup \tth), \Lef(x \cup \tfo) \rangle
+\hfill\cr\hfill{}
+- \half \langle x \cup \Lef(\ttw \cup \tth), \tfo \rangle
+- \half \langle \Lef(\ttw \cup \tth), x \rangle \Lef(\tfo)
+\cr\hfill{}
+- \langle \ttw, \tth \rangle
+\langle x, \tfo \rangle
++ \half \langle \Lef(x \cup \Lef(\ttw \cup \tth)), \tfo \rangle,
+\cr{}
+\langle (\conn_{x} \Lef) (\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
+= -\Lef\^4(x \cup \ttw \cup \tth \cup \Lef(\ton \cup \tfo))
+- \half \langle \Lef(\ttw \cup \tth), \Lef(x \cup \Lef(\ton \cup \tfo)) \rangle
+\hfill\cr\hfill{}
+- \half \langle x \cup \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
+- \Lef\^3(\ttw \cup \tth \cup x)
+\langle \ton \cup \tfo \rangle
+\cr\hfill{}
++ \langle \ttw, \tth \rangle 
+\Lef\^3(\ton \cup \tfo \cup x)
++ \half \langle \Lef(x \cup \Lef(\ttw \cup \tth)), \Lef(\ton \cup \tfo) \rangle.
+}
+$$
+In the last line, all the tensor fields are primitive.
+(NOTE: We're missing the $d_x \ttw \cup \tth$ etc terms.)
+\end{lemm}
+
+
+
+
+The metric has constant sectional curvature $-k$ if and only if 
+its curvature tensor is equal to
+$$
+\displaylines{
+R(\ton,\ttw,\tth,\tfo)
+= 
+- k\langle \ton, \tfo \rangle \langle \ttw, \tth \rangle
++ k \langle \ton, \tth \rangle \langle \ttw, \tfo \rangle.
+}
+$$
+This is satisfied for our metric if and only if
+$$
+\displaylines{
+- k \langle \ton \cup \tfo, \ttw \cup \tth \rangle
++ k \langle \ton \cup \tth, \ttw \cup \tfo \rangle,
+\hfill\cr\hfill{}
+ =
+- (4k+1) \langle \ton, \tfo \rangle \langle \ttw, \tth \rangle
++ (4k+1) \langle \ton, \tth \rangle \langle \ttw, \tfo \rangle
+}
+$$
+for all $\ton,\ttw,\tth,\tfo$ and all Kahler classes $\kf$. Suppose we
+now pick unit vectors $\ttw = \tth$ and $\ttw \perp \tfo$. Then
+$$
+\displaylines{
+- k \langle \ton \cup \tfo, \ttw \cup \ttw \rangle
++ k \langle \ton \cup \ttw, \ttw \cup \tfo \rangle,
+ =
+- (4k+1) \langle \ton, \tfo \rangle
+}
+$$
+
+Alternatively, this holds if and only if
+$$
+\displaylines{
+- \onfo \langle \Lef(\ton \cup \tfo), \Lef(\ttw \cup \tth) \rangle
++ \onfo \langle \Lef(\ton \cup \tth), \Lef(\ttw \cup \tfo) \rangle
+\hfill\cr\hfill{}
+ =
+- k \langle \ton, \tfo \rangle \langle \ttw, \tth \rangle
++ k \langle \ton, \tth \rangle \langle \ttw, \tfo \rangle.
+}
+$$
+I wonder what happens if we take the derivative of that equation?
+
+Basically, I'd like to show the metric almost never has constant sectional
+curvature. At least that would be something new. It would be nice if I
+could first show that to have constant sectional curvature we must have
+$$
+\langle \ton \cup \tfo, \ttw \cup \tth \rangle
+= \lambda \langle \ton, \tfo \rangle \langle \ttw, \tth \rangle
+$$
+for some $\lambda \geq 0$, all tangent vectors and all Kahler classes.
+Ideally, that would force us to either have $n = 2$ (if $\lambda \not=
+0$) or $h^{1,1} = 1$ (else). For the second we'd have $\kf^2 = 0$, so $n
+= 1$. For the first we'd get $\ton = 0$ for any primitive $\ton$ by
+evaluating at $(\ton,\kf,\kf,\kf)$, so $h^{1,1} = 1$.
+
+
+
+\begin{rema}
+If $x,y$ are $(2,2)$-classes, then $\Lef\^4(x \cup y) = \langle x, y
+\rangle - \langle \Lef(x), \Lef(y) \rangle + \langle \Lef\^2(x),
+\Lef\^2(y) \rangle$. An alternate expression for the curvature tensor is
+thus
+\begin{equation*}
+\displaylines{
+R(\ton,\ttw,\tth,\tfo)
+= 
+- \onfo \langle \ton, \tfo \rangle 
+    \langle \ttw, \tth \rangle
++ \onfo \langle \ton, \tth \rangle 
+    \langle \ttw, \tfo \rangle
+\hfill\cr\hfill{}
+- \onfo \langle \ton \cup \tfo, \ttw \cup \tth \rangle
++ \onfo \langle \ton \cup \tth, \ttw \cup \tfo \rangle,
+}
+\end{equation*}
+so the curvature tensor is a perturbation of the curvature tensor of a
+space form of constant sectional curvature $-1/4$. Unfortunately there
+is no known way to control the perturbation terms in general; bounding them
+from above is impossible by Wilson and Trenner's
+example~\cite{WilsonTrenner}, and bounding them from below is beyond
+our reach in the cohomology ring.
+
+It is sometimes possible to bound these curvatures, for example in the
+cohomology ring of a complex torus or on a compact Kahler surface. Such
+bounds seem to be related to the optimal real numbers $M(\kf)$ such that
+$$
+| \ton \cup \ttw |^2 \leq M(\kf)\, |\ton|^2 |\ttw|^2
+$$
+for all $\ton, \ttw \in \coho{1,1}(X,\RR)$.  On a
+surface we have $M(\kf) = 1$ and on a complex torus $M(\kf) = 2(n-1)/n$
+for all $\kf$. In general, the function $\kf \mapsto M(\kf)$ is lower
+semicontinuous and $M(\kf) \geq 2(n-1)/n$; Wilson and Trenner's example
+then shows that $M(\kf)$ indeed varies with $\kf$ and can tend to
+infinity. If $M(\kf)$ can be bounded uniformly in $\kf$, then the
+curvatures of our metric are bounded as well. 
+
+I don't know of a condition on $X$ that forces the $M(\kf)$ to
+be bounded. By comparison with the completeness of the metric it would
+be tempting to think it related to subvarieties whose volume can be
+contracted to zero without contracting the whole ambient variety, and
+that is what happens in Wilson and Trenner's example where the curvature
+blows up, but that clearly doesn't hold because the $M(\kf)$ are
+uniformly bounded on surfaces where we can blow up points and contract
+the volume of the exceptional divisors.
+\end{rema}
+
+
+
+\section{The complexified K\"{a}hler cone}
+
+
+In mirror symmetry, one considers not only the K\"{a}hler cone, but its
+complexification
+$$
+\coho{1,1}(X,\RR)/\coho{1,1}(X,\ZZ) \oplus i\KC(X).
+$$
+As in the real case, there's an obvious smooth Hermitian metric on this
+complexification, and there's some expectation that this metric will be
+mirror dual to the Weil--Petersson metric on the complex moduli space,
+at least in the case of Calabi--Yau manifolds. While mirror symmetry
+remains obscure in general, it makes sense to study the complexification
+of the K\"{a}hler cone without restrictions on the geometry of the
+underlying manifold. We thus define the \emph{complexified K\"{a}hler
+cone} of $X$ to be
+\begin{align*}
+\CKC(X) 
+&:=
+\{ \ckf \in \coho{1,1}(X,\CC) 
+\mid
+\text{$\Im\ckf$ contains a K\"{a}hler metric}
+\}
+\\
+&\phantom{:}= \coho{1,1}(X,\RR) \oplus i C_{\RR}(X).
+\end{align*}
+Note that we haven't quotiented the real part by $\coho{1,1}(X,\RR)$.
+We leave to the reader to check that all our calculations work verbatim
+after taking this quotient; we only omit it out of notational laziness. 
+
+
+As in the real case, each Kahler class $\kf = \Im \ckf$ defines a
+Hermitian inner product on the tangent space $T_{\ckf} \CKC$, so we get
+a smooth Hermitian metric $h$ on the complexified Kahler cone. As in the
+Riemannian case, we easy prove the following.
+
+
+\begin{prop}
+Let $\ton,\ttw$ be elements of $T_C$ at a point $\ckf$. Let $\kf =
+\Im\ckf$ and let $\Lef$ be the adjoint of the Lefschetz operator that
+$\kf$ defines.  The Hermitian metric on $C$ can be defined in any of the
+following ways.
+\begin{enumerate}
+    \item 
+$$
+h(\ton, \ttw)
+= \q{\ton} \cdot \q{\ov{\ttw}}
+- \qq{\ton}{\ov\ttw}.
+$$
+    \item
+\hfil
+$
+h(\ton,\ttw)
+= \Lef(\ton)\Lef(\ov\ttw)
+- \Lef\^2(\ton\wedge\ov\ttw).
+$
+\hfil
+    \item
+The metric is the Hermitian form associated to 
+$-4\d\dbar\frac{i}{2}\Vol$, where $\Vol : C \to \RR$, $\ckf \mapsto
+\Vol(X,\Im\ckf)$.
+\end{enumerate}
+It follows that this Hermitian metric is a K\"{a}hler metric.
+\end{prop}
+
+
+
+Remark that there is an obvious smooth inclusion $\KC \hookrightarrow \CKC$
+and a smooth submersion $\Im : \CKC \to \KC$.
+
+\begin{prop}
+The following are true.
+\begin{enumerate}
+    \item 
+$\KC$ is a totally geodesic, totally real minimal Riemannian submanifold
+of $\CKC$.  
+    \item 
+$\Im: \CKC \to \KC$ is a Riemannian submersion.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+The inclusion $\KC \hookrightarrow \CKC$ makes $\KC$ into a Riemann
+submanifold because of how we defined the complexified metric. The
+submanifold $\KC \subset \CKC$ is also fixed by the smooth isometric
+involution $\ckf \mapsto -\ov\ckf$ of the complexified K\"{a}hler cone;
+it is thus a totally geodesic submanifold of $\CKC$. It is totally real
+by inspection, and minimal because it is totally geodesic.
+
+For the second claim, calculate. Actually, calculate for the first claim
+as well to check that the coefficients are the right ones.
+\end{proof}
+
+
+These properties come in handy because, as we saw, it is quite tricky to
+bound the sectional curvature of the metric on the Kahler cone from
+below. However, the holomorphic structure of the complexified Kahler
+cone and the fact that we have a Kahler metric there results in a
+nice expression for the Chern curvature tensor which does admit a good
+lower bound. Some elementary algebra combined with the Riemannian
+submersion then yield a (probably nonoptimal) lower bound on the
+sectional curvatures of the Kahler cone.
+
+
+
+\subsection*{The Chern connection and curvature form}
+
+The Chern connection on a holomorphic vector bundle with a Hermitian
+metric $h$ is the unique connection that is compatible with the metric
+and whose $(0,1)$-part is $\dbar$; that is, it satisfies
+$$
+d h(\ton, \ov{\ttw}) 
+= h(\chern \ton, \ov{\ttw}) + h(\ton, \ov{\chern \ttw}),
+\quad
+\chern^{0,1} = \dbar
+$$
+for all sections $u, v$ of the bundle.
+
+
+\begin{prop}
+\label{prop:chernconnection}
+The Chern connection of the K\"{a}hler metric on $\KC$ is
+$$
+\chern \ton
+= d\ton 
+- \Lef(\d \kf) \, \ton
+- \Lef(\ton) \, \d\kf 
++ \Lef(\ton \cup \d\kf).
+$$
+\end{prop}
+
+
+\begin{proof}
+It's enough to calculate the Chern connection on local holomorphic
+vector fields, so let $\ton, \ttw$ be thus. Then the Chern connection
+satisfies
+$$
+\d h(\ton,\ov\ttw)
+= h(\chern^{1,0}\ton, \ov\ttw).
+$$
+We have
+$$
+h(\ton,\ov\ttw)
+= \Lef(\ton) \Lef(\ov\ttw) - \Lef\^2(\ton \cup \ov\ttw)
+$$
+and we remark that $d_{\tth} \kf = \frac{1}{2i} \tth$.
+Then
+$$
+\displaylines{
+\d_{\tth} h(\ton,\ov\ttw)
+= -2 \tfrac{1}{2i} \Lef(\tth) \Lef(\ton) \Lef(\ov\ttw)
++ \Lef(\d_{\tth}\ton) \Lef(\ov\ttw)
+\hfill\cr\hfill{}
++ \tfrac{1}{2i} \Lef\^2(\tth \cup \ton) \Lef(\ov\ttw)
++ \tfrac{1}{2i} \Lef\^2(\tth \cup \ov\ttw)\Lef(\ov\ttw)
++ \tfrac{1}{2i} \Lef(\tth) \Lef\^2(\ton \cup \ov\ttw)
+\cr\hfill{}
+- \Lef\^2(\d_{\tth}\ton \cup \ov\ttw)
+- \tfrac{1}{2i} \Lef\^3(\tth \cup \ton \cup \ov\ttw).
+\cr{}
+\phantom{\d_{\tth} h(\ton,\ov\ttw)}
+= h(\d_{\tth}\ton, \ttw)
+- h(\tfrac{1}{2i} \Lef(\tth) \ton, \ttw)
+- h(\Lef(\ton) \tfrac{1}{2i}\tth, \ttw)
++ h(\ton \cup \tfrac{1}{2i} \tth, \ttw)
+\hfill
+}
+$$
+because 
+$$
+h(\ton \cup \tfrac{1}{2i} \tth, \ttw)
+= \tfrac{1}{2i} \Lef\^2(\tth \cup \ton) \Lef(\ov\ttw)
+- \tfrac{1}{2i} \Lef\^3(\tth \cup \ton \cup \ov\ttw),
+$$
+and this is equal to the announced expression.
+\end{proof}
+
+
+\begin{lemm}
+\label{coro:kahlerform}
+$\chern^{1,0} \kf = -\d\kf$.
+\end{lemm}
+
+
+\begin{proof}
+Let $\ton$ be a tangent field on $\KC$ and consider the equation
+$\langle \ton, \kf \rangle = \Lef \ton$. Upon differentiating this in
+the direction of $\ttw$ we get
+$$
+\langle \chern_{\ttw}\ton, \kf \rangle 
++ \langle \ton, \chern_{\ttw}\kf \rangle 
+= (d_{\ttw}\Lef) \ton
++ \Lef d_{\ttw}\ton
+= \tfrac{1}{2}i \langle \ton, \ttw\rangle
++ \Lef d_{\ttw}\ton.
+$$
+Proposition~\ref{prop:chernconnection} now gives
+$$
+\displaylines{
+\langle \chern_{\ttw}\ton, \kf \rangle 
+=
+\Lef(d_{\ttw}\ton)
+- i\Lef\ton\cdot \Lef\ttw
++ i\Lef\^2(\ton \wedge \ttw)
+}
+$$
+so
+\begin{align*}
+\langle \ton, \chern_{\ttw}\kf \rangle
+&=
+-\tfrac{1}{2}i \Lef\ton \cdot \Lef \ttw
++\tfrac12 i \Lef\^2(\ton \wedge \ttw)
++ i\Lef\ton\cdot \Lef\ttw
+- i\Lef\^2(\ton \wedge \ttw)
+\\
+&=
+\langle \ton, -\tfrac{1}{2i} \ttw \rangle
+= \langle \ton, -\d\kf(\ttw) \rangle.
+\qedhere
+\end{align*}
+\end{proof}
+
+
+\begin{theo}
+The curvature tensor of the K\"{a}hler metric on $\KC$ is
+\begin{equation*}
+R(\ton,\ov\ttw,\tth,\ov\tfo)
+= - \tfrac14 h(\ton,\ov\ttw)\, h(\tth,\ov\tfo)
+- \tfrac14 h (\ton,\ov\tfo)\, h(\tth,\ov\ttw)
++ \tfrac14 \langle \ton \wedge \tth, \ov{\ttw\wedge\tfo} \rangle.
+\end{equation*}
+\end{theo}
+
+
+\begin{proof}
+Let $\ton$ be a local holomorphic section of the tangent bundle of $\KC$.
+By definition, we have $\curv = \chern^2$ and since our connection is
+Hermitian, we get $\curv = \dbar \chern$ on holomorphic sections.
+Note that since $\kf = \Im \alpha$, we have $\d\dbar \kf = 0$.
+Proposition~\ref{prop:chernconnection} and
+Lemma~\ref{coro:kahlerform} now give
+\begin{align*}
+\dbar_{\ov\tfo} \chern_{\tth} \ton
+&=
+- \tfrac{1}{2i} \langle \tth,\ov{\chern^{1,0}_{\tfo}\kf} \rangle\, \ton
+- \tfrac{1}{2i} \langle \ton, \ov{\chern^{1,0}_{\tfo}\kf} \rangle\, \tth
++ \tfrac{1}{2i} \dbar(\Lambda(\ton \wedge \tth))
+\\
+&=
+- \tfrac{1}{4} \langle \tth,\ov{\tfo} \rangle\, \ton
+- \tfrac{1}{4} \langle \ton, \ov{\tfo} \rangle\, \tth
++ \tfrac{1}{2i} \dbar(\Lambda(\ton \wedge \tth)).
+\end{align*}
+Upon taking the inner product with $\ttw$, we then get
+$$
+R(\ton,\ov\ttw,\tth,\ov\tfo)
+= -\tfrac14
+\langle \ton, \ov\ttw \rangle
+\langle \tth,\ov{\tfo} \rangle
+-\tfrac14
+\langle \ton, \ov{\tfo} \rangle
+\langle \tth, \ov\ttw \rangle
++ \tfrac{1}{4} \langle \ton \wedge \tth, \ov{\ttw \wedge \tfo}\rangle.
+\qedhere
+$$
+\end{proof}
+
+
+\begin{proof}[Alternate proof]
+Let $\ton,\ttw,\tth,\tfo$ be local holomorphic sections of the tangent
+bundle of $\KC$.  By definition, we have $\curv = \chern^2$ and since
+our connection is the Chern connection, we get $\curv = \dbar \chern$ on
+holomorphic sections. Proposition~\ref{prop:chernconnection} now gives
+\begin{align*}
+\dbar_{\ov\tfo} \chern_{\tth} \ton
+&=
+\dbar_{\ov\tfo} \d_{\tth}\ton
+- \tfrac{1}{2i} ((\dbar_{\ov\tfo}\Lef) \tth)\ton
+- \tfrac{1}{2i} ((\dbar_{\ov\tfo}\Lef) \ton)\tth
++ \tfrac{1}{2i} (\dbar_{\ov\tfo}\Lef)(\ton\wedge\tth)
+\\
+&=
+- \tfrac{1}{4} \langle \tth,\ov{\tfo} \rangle\, \ton
+- \tfrac{1}{4} \langle \ton, \ov{\tfo} \rangle\, \tth
++ \tfrac{1}{2i} (\dbar_{\ov\tfo}\Lef)(\ton \wedge \tth).
+\end{align*}
+Upon taking the inner product with $\ttw$, we then get
+$$
+R(\ton,\ov\ttw,\tth,\ov\tfo)
+= -\tfrac14
+\langle \ton, \ov\ttw \rangle
+\langle \tth,\ov{\tfo} \rangle
+-\tfrac14
+\langle \ton, \ov{\tfo} \rangle
+\langle \tth, \ov\ttw \rangle
++ \tfrac{1}{4} \langle \ton \wedge \tth, \ov{\ttw \wedge \tfo}\rangle.
+\qedhere
+$$
+\end{proof}
+
+
+
+
+\bibliographystyle{alpha}
+\bibliography{main}
+
+\end{document}

@@ -420,29 +420,41 @@ that possibly acts by nontrivial isometries on $\KC(X)$ is discrete.
 
 \section{The Levi-Civita connection}
 
-The Levi-Civita connection is the unique connection on the tangent
-bundle that's compatible with the metric and is torsion-free. That is,
-it satisfies
-$$
-d g(\ton, \ttw) 
-= g(\levi \ton, \ttw) + g(\ton, \levi \ttw),
-\quad
-\levi_{\ton}\ttw - \levi_{\ttw}\ton = [\ton,\ttw]
-$$
-for all sections $\ton, \ttw$ of the bundle.
+We start with a couple of preliminary computations.
 
 \begin{lemm}
-Let $\ton,\ttw,\tth$ be $(1,1)$-classes. 
-\begin{itemize}
-    \item
-$\langle \Lef(\ton\cup\ttw), \tth \rangle
-= - \Lef\^3(\ton \cup \ttw \cup \tth) \,\kf\^n
-+ \Lef\^2(\ton \cup \ttw) \Lef(\tth) \,\kf\^n$.
-    \item 
-$\Lef\^3(\ton \cup \ttw \cup \tth)
-= \Lef\^2(\ton \cup \Lef(\ttw \cup \tth))
-- \Lef(\ton) \Lef\^2(\ttw \cup \tth)$.
-\end{itemize}
+If $u_1, \ldots, u_k$ are real $(1,1)$-classes, then
+$$
+\displaylines{
+d_{\ttw} \Lef\^{k}(u_1 \cup \cdots \cup u_k)
+= -\Lef(\ttw) \Lef\^{k}(u_1 \cup \cdots \cup u_k)
+\hfill\cr\hfill{}
++ \Lef\^{k}(d_{\ttw} u_1 \cup \cdots \cup u_k)
++ \cdots +
+\Lef\^{k}(u_1 \cup \cdots \cup d_{\ttw} u_k)
+\hfill\cr\hfill{}
++ \Lef\^{k+1}(u_1 \cup \cdots \cup u_k \cup \ttw).
+}
+$$
+\end{lemm}
+
+\begin{proof}
+This is clear once we write
+$$
+\Lef\^{k}(u_1 \cup \cdots \cup u_k)
+= \frac{1}{\Vol(X,\kf)} \int_X u_1 \cup \cdots \cup u_k \cup \kf\^{n-k}
+$$
+and compute.
+\end{proof}
+
+\begin{lemm}
+\label{lemm:triple}
+Let $\ton,\ttw,\tth$ be $(1,1)$-classes. Then
+$$
+\langle \Lef(\ton\cup\ttw), \tth \rangle
+= - \Lef\^3(\ton \cup \ttw \cup \tth)
++ \Lef\^2(\ton \cup \ttw) \Lef(\tth).
+$$
 \end{lemm}
 
 
@@ -451,17 +463,6 @@ First note that if $\tth$ is a $(1,1)$-class, then $\tth = (\tth -
 \frac1n \Lef(\tth)\kf) + \frac1n \Lef(\tth) \kf$ is its primitive
 decomposition. Then
 \begin{align*}
-* \tth 
-&= -(\tth - \tfrac1n \Lef(\tth)\kf) \cup \kf\^{n-2}
-+ \tfrac1n \Lef(\tth) \kf\^{n-1}
-\\
-&= -\tth \cup \kf\^{n-2}
-+ \tfrac{n-1}{n} \Lef(\tth) \kf\^{n-1}
-+ \tfrac1n \Lef(\tth) \kf\^{n-1}
-\\
-&= -\tth \cup \kf\^{n-2} + \Lef(\tth)\, \kf\^{n-1},
-%% and
-\\
 *(\kf \cup \tth)
 &= *( \kf \cup (\tth - \tfrac1n \Lef(\tth)\kf))
 + * \Bigl( \tfrac{2}{n} \Lef(\tth) \kf\^2 \bigr)
@@ -479,25 +480,26 @@ decomposition. Then
 We now get
 \begin{align*}
 \langle \Lef(\ton \cup \ttw), \tth \rangle \,\kf\^n
-&= \langle \ton \cup \ttw, \kf \cup \tth \rangle \,\kf\^n
-\\
-&= \ton \cup \ttw \cup 
-(-\tth \cup \kf\^{n-3} + \Lef(\tth)\, \kf\^{n-2})
-\\
-&= - \Lef\^3(\ton \cup \ttw \cup \tth) \,\kf\^n
-+ \Lef\^2(\ton \cup \ttw) \Lef(\tth) \,\kf\^n
-\end{align*}
-on the one hand, which gives the first result. On the other, we have
-\begin{align*}
-\langle \Lef(\ton \cup \ttw), \tth \rangle \,\kf\^n
 &= \Lef(\ton \cup \ttw) \cup 
 (-\tth \cup \kf\^{n-2} + \Lef(\tth)\, \kf\^{n-1})
 \\
 &= - \Lef\^2(\Lef(\ton \cup \ttw) \cup \tth) \,\kf\^{n}
 + 2 \Lef\^2(\ton \cup \ttw) \Lef(\tth) \,\kf\^{n},
 \end{align*}
-whence we deduce the second.
+which proves the result.
 \end{proof}
+
+
+Recall that the Levi-Civita connection is the unique connection on the tangent
+bundle that's compatible with the metric and is torsion-free. That is, it
+satisfies
+$$
+d g(\ton, \ttw) 
+= g(\levi \ton, \ttw) + g(\ton, \levi \ttw),
+\quad
+\levi_{\ton}\ttw - \levi_{\ttw}\ton = [\ton,\ttw]
+$$
+for all sections $\ton, \ttw$ of the bundle.
 
 
 \begin{prop}
@@ -514,175 +516,75 @@ $$
 \end{prop}
 
 \begin{proof}
+The connection we've written down satisfies $\conn_{\ton} \ttw - \conn_{\ttw}
+\ton = [\ton, \ttw]$ by inspection. We turn to its computation.
+
 The metric is defined by
 $$
 \langle \ton, \ttw \rangle
 = \Lef \ton \, \Lef \ttw
 - \Lef\^2(\ton \cup \ttw).
 $$
-We have $d_{\tth}(\Lef\ton) = \Lef(d_{\tth}\ton) -\langle
-\ton,\tth\rangle$ by direct calculation.  Writing
-$$
-\Lef\^2(\ton \cup \ttw)
-= \frac{1}{\Vol}\int_X \ton\cup\ttw\cup\kf\^{n-2}
-$$
-we find that
-$$
-d_{\tth}(\Lef\^2(\ton \cup \ttw))
-= -\Lef(z) \, \Lef\^2(\ton \cup \ttw)
-+ \Lef\^2(d_{\tth} \ton \cup \ttw)
-+ \Lef\^2(\ton \cup d_{\tth} \ttw)
-+ \Lef\^3(\ton \cup \ttw \cup \tth),
-$$
-so
+Taking the derivative of this in the $\tth$ direction gives
 $$
 \displaylines{
 d_{\tth} \langle \ton, \ttw \rangle
-=
-\bigl(\Lef(d_{\tth}\ton) -\langle \ton,\tth\rangle\bigr) \Lef(\ttw)
-+
-\Lef(\ton)\bigl(\Lef(d_{\tth}\ttw) -\langle \ttw,\tth\rangle\bigr)
+= 
+- \Lef(\ton) \Lef(\ttw) \Lef(\tth)
++ \Lef(d_{\tth}\ton) \Lef(\ttw)
++ \Lef\^{2}(\ton \cup \tth) \Lef(\ttw)
 \hfill\cr\hfill{}
-+ \Lef(\tth) \, \Lef\^2(\ton \cup \ttw)
+- \Lef(\ton) \Lef(\ttw) \Lef(\tth)
++ \Lef(\ton) \Lef(d_{\tth}\ttw)
++ \Lef(\ton) \Lef\^{2}(\ttw \cup \tth)
+\cr\hfill{}
++ \Lef(\tth) \Lef\^2(\ton \cup \ttw)
 - \Lef\^2(d_{\tth} \ton \cup \ttw)
 - \Lef\^2(\ton \cup d_{\tth} \ttw)
 - \Lef\^3(\ton \cup \ttw \cup \tth)
 \cr{}
 \phantom{d_{\tth} \langle \ton, \ttw \rangle}
-= \langle d_{\tth} \ton, \ttw \rangle
+=: \langle d_{\tth} \ton, \ttw \rangle
 + \langle \ton, d_{\tth} \ttw \rangle
-- \langle \ton,\tth\rangle\, \Lef(\ttw)
-- \Lef(\ton) \, \langle \ttw,\tth\rangle
++ A(\ton, \ttw, \tth).
 \hfill
+}
+$$
+We're going to write $A = \frac12 A + \frac12 A$ and try to write the first half
+as an inner product with $\ttw$, and the second half as an inner product with
+$\ton$.
+
+To that end, we note that
+$$
+\displaylines{
+A(\ton, \ttw, \tth)
+= 
+- \Lef(\ton) \Lef(\ttw) \Lef(\tth)
++ \Lef\^{2}(\ton \cup \tth) \Lef(\ttw)
+\hfill\cr\hfill{}
+- \Lef(\ton) \Lef(\ttw) \Lef(\tth)
++ \Lef(\ton) \Lef\^{2}(\ttw \cup \tth)
 \cr\hfill{}
-+ \Lef(\tth) \, \Lef\^2(\ton \cup \ttw)
-- \Lef\^3(\ton \cup \ttw \cup \tth).
-}
-$$
-The first two terms here are nice and we hope to mold the rest into
-a connection. Being greedy, we'll take all the remaining terms and try
-to fit them into the $\langle \conn_{\tth} \ton, \ttw \rangle$ mold. If
-we're lucky, what comes out will have some symmetry so we can conclude
-that what we've made is in fact $2$ times the missing part of our
-connection. We first write
-$$
-\displaylines{
-- \langle \ton,\tth\rangle\, \Lef(\ttw)
-- \Lef(\ton) \, \langle \ttw,\tth\rangle
-+ \Lef(z) \, \Lef\^2(\ton \cup \ttw)
++ \Lef(\tth) \Lef\^2(\ton \cup \ttw)
 - \Lef\^3(\ton \cup \ttw \cup \tth)
-\hfill\cr\hfill{}
-= 
-- \langle \Lef(\ton) \tth, \ttw \rangle
-- \langle \Lef(\tth) \ton, \ttw \rangle
-+ \Lef(\ton)\,\Lef\^2(\ttw \cup \tth)
-- \Lef\^3(\ton \cup \ttw \cup \tth)
-}
-$$
-by expanding the definition of $\langle \ttw, \tth \rangle$. Using
-Lemma~\ref{lemm:triangle} we now find that
-\begin{align*}
-\Lef\^3(\ton \cup \ttw \cup \tth)\, \kf\^n
-&= L\^{n-3}(\ttw \cup \tth) \cup \ton
-\\
-&= L\^{n-2}(\Lef(\ttw \cup \tth) 
-- \tfrac{1}{n-1}L\Lef\^2(\ttw\cup\tth)) \cup \ton
-\\
-&= \bigl(\Lef\^{2}(\Lef(\ttw \cup \tth) \cup \ton)
-- \Lef\^2(\ttw\cup\tth) \Lef(\ton)\bigr)\kf\^n.
-\end{align*}
-Then
-$$
-\displaylines{
-\Lef(\ton)\, \Lef\^2(\ttw \cup \tth)
-- \Lef\^3(\ton \cup \ttw \cup \tth)
-\hfill\cr\hfill{}
-\begin{aligned}
-&=
-\Lef(\ton)\,\Lef\^2(\ttw \cup \tth)
-- \Lef\^2(\Lef(\ttw \cup \tth) \cup \ton)
-+ \Lef\^2(\ttw\cup\tth) \Lef(\ton)
-\\
-&=
-\Lef(\ton)\,\Lef( \Lef(\ttw \cup \tth))
-- \Lef\^2(\Lef(\ttw \cup \tth) \cup \ton)
-= \langle \ton, \Lef(\ttw \cup \tth) \rangle
-\end{aligned}
-}
-$$
-because $2\Lef\^2 = \Lef^2$. In conclusion, we've found that
-$$
-\displaylines{
-- \langle \ton,\tth\rangle\, \Lef(\ttw)
-- \Lef(\ton) \, \langle \ttw,\tth\rangle
-+ \Lef(z) \, \Lef\^2(\ton \cup \ttw)
-- \Lef\^3(\ton \cup \ttw \cup \tth)
-\hfill\cr\hfill{}
-= 
-- \langle \Lef(\ton) \tth, \ttw \rangle
-- \langle \Lef(\tth) \ton, \ttw \rangle
-+ \langle \ton, \Lef(\ttw \cup \tth) \rangle.
-}
-$$
-Here the left-hand side is symmetric in $u, v$, so the right-hand side
-must also be symmetric in them. Splitting the left-hand side into two
-halves, we then get that
-$$
-\displaylines{
-d_{\tth} \langle \ton, \ttw \rangle
-= \langle d_{\tth} \ton, \ttw \rangle
--\tfrac12 \langle \Lef(\ton) \tth, \ttw \rangle
--\tfrac12 \langle \Lef(\tth) \ton, \ttw \rangle
-+\tfrac12 \langle \Lef(\ton \cup \tth), \ttw \rangle
-\hfill\cr\hfill{}
-+ \langle \ton, d_{\tth} \ttw \rangle
--\tfrac12 \langle \ton, \Lef(\ttw) \tth \rangle
--\tfrac12 \langle \ton, \Lef(\tth) \ttw \rangle
-+\tfrac12 \langle \ton, \Lef(\ttw \cup \tth) \rangle
 \cr{}
-\phantom{d_{\tth} \langle \ton, \ttw \rangle}
-= \langle d_{\tth} \ton
-- \tfrac12\Lef(\ton) \tth
-- \tfrac12\Lef(\tth) \ton
-+ \tfrac12\Lef(\ton \cup \tth), \ttw \rangle
+\phantom{A(\ton, \ttw, \tth)}
+= 
+- \Lef(\tth) \langle \ton, \ttw \rangle
+- \Lef(\ton) \langle \tth, \ttw \rangle
++ \Lef\^{2}(\ton \cup \tth) \Lef(\ttw)
+- \Lef\^3(\ton \cup \ttw \cup \tth)
 \hfill\cr\hfill{}
-+ \langle \ton, d_{\tth} \ttw
-- \tfrac12\Lef(\ttw) \tth
-- \tfrac12\Lef(\tth) \ttw
-+ \tfrac12\Lef(\ttw \cup \tth) \rangle
-\cr{}
-\phantom{d_{\tth} \langle \ton, \ttw \rangle}
-= \langle \conn_{\tth} u, v \rangle
-+ \langle u, \conn_{\tth} v \rangle
-\hfill
+=
+- \langle \Lef(\tth) \ton, \ttw \rangle
+- \langle \Lef(\ton) \tth, \ttw \rangle
++ \langle \Lef(\ton \cup \tth), \ttw \rangle
 }
 $$
-as promised. It is now clear that $\conn_{\ton} \ttw - \conn_{\ttw} \ton
-= [\ton, \ttw]$, so $\conn$ is the Leci-Civita connection of the metric.
-\end{proof}
-
-
-\begin{lemm}
-\label{lemm:triangle}
-The triangle
-$$
-\begin{tikzpicture}[auto]
-\node (UL) {$\coho{2,2}(X,\CC)$};
-\node (UR) [right of=UL,node distance=120pt] {$\coho{n-1,n-1}(X,\CC)$};
-\node (DR) [below of=UR,node distance=40pt] {$\coho{1,1}(X,\CC),$};
-\draw [->] (UL) edge node {\small$L\^{n-3}$} (UR);
-\draw [->] (UL) edge node[below] {\small$\phi$} (DR);
-\draw [->] (DR) edge node[right] {\small$L\^{n-2}$} (UR);
-\end{tikzpicture}
-$$
-where $\phi(x) = \Lef x - \frac{1}{n-1} \Lef\^2 x \, \kf$, is
-commutative.
-\end{lemm}
-
-
-\begin{proof}
-This can be verified by a direct calculation once we remember that
-$[L\^{n-2},\Lef] = L\^{n-3}$ on $4$-classes.
+by Lemma~\ref{lemm:triple}, which can indeed be written as an inner product with
+$\ttw$. Since $A$ is symmetric in $\ton, \ttw, \tth$, we can start again from
+$A$ and write it as an inner product with $\ton$. Taking half of each, we arrive
+at our claimed form of the connection.
 \end{proof}
 
 
@@ -804,48 +706,6 @@ as promised.
 \end{proof}
 
 
-\begin{lemm}
-Let $x,\ttw,\tth,\tfo$ be tensor fields and suppose that $x,\ttw,\tth$
-are primitive. Then
-$$
-\displaylines{
-\langle (d_x \Lef) (\ttw \cup \tth), \tfo \rangle
-= -\Lef\^4(x \cup \ttw \cup \tth \cup \tfo)
-- \half \langle \Lef(\ttw \cup \tth), \Lef(x \cup \tfo) \rangle
-\hfill\cr\hfill{}
-- \half \langle x \cup \Lef(\ttw \cup \tth), \tfo \rangle
-- \half \langle \Lef(\ttw \cup \tth), x \rangle \Lef(\tfo),
-\cr{}
-\langle (\conn_{x} \Lef) (\ttw \cup \tth), \tfo \rangle
-= -\Lef\^4(x \cup \ttw \cup \tth \cup \tfo)
-- \half \langle \Lef(\ttw \cup \tth), \Lef(x \cup \tfo) \rangle
-\hfill\cr\hfill{}
-- \half \langle x \cup \Lef(\ttw \cup \tth), \tfo \rangle
-- \half \langle \Lef(\ttw \cup \tth), x \rangle \Lef(\tfo)
-\cr\hfill{}
-- \langle \ttw, \tth \rangle
-\langle x, \tfo \rangle
-+ \half \langle \Lef(x \cup \Lef(\ttw \cup \tth)), \tfo \rangle,
-\cr{}
-\langle (\conn_{x} \Lef) (\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
-= -\Lef\^4(x \cup \ttw \cup \tth \cup \Lef(\ton \cup \tfo))
-- \half \langle \Lef(\ttw \cup \tth), \Lef(x \cup \Lef(\ton \cup \tfo)) \rangle
-\hfill\cr\hfill{}
-- \half \langle x \cup \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
-- \Lef\^3(\ttw \cup \tth \cup x)
-\langle \ton \cup \tfo \rangle
-\cr\hfill{}
-+ \langle \ttw, \tth \rangle 
-\Lef\^3(\ton \cup \tfo \cup x)
-+ \half \langle \Lef(x \cup \Lef(\ttw \cup \tth)), \Lef(\ton \cup \tfo) \rangle.
-}
-$$
-In the last line, all the tensor fields are primitive.
-(NOTE: We're missing the $d_x \ttw \cup \tth$ etc terms.)
-\end{lemm}
-
-
-
 
 The metric has constant sectional curvature $-k$ if and only if 
 its curvature tensor is equal to
@@ -955,308 +815,6 @@ blows up, but that clearly doesn't hold because the $M(\kf)$ are
 uniformly bounded on surfaces where we can blow up points and contract
 the volume of the exceptional divisors.
 \end{rema}
-
-
-
-\section{The complexified K\"{a}hler cone}
-
-
-In mirror symmetry, one considers not only the K\"{a}hler cone, but its
-complexification
-$$
-\coho{1,1}(X,\RR)/\coho{1,1}(X,\ZZ) \oplus i\KC(X).
-$$
-As in the real case, there's an obvious smooth Hermitian metric on this
-complexification, and there's some expectation that this metric will be
-mirror dual to the Weil--Petersson metric on the complex moduli space,
-at least in the case of Calabi--Yau manifolds. While mirror symmetry
-remains obscure in general, it makes sense to study the complexification
-of the K\"{a}hler cone without restrictions on the geometry of the
-underlying manifold. We thus define the \emph{complexified K\"{a}hler
-cone} of $X$ to be
-\begin{align*}
-\CKC(X) 
-&:=
-\{ \ckf \in \coho{1,1}(X,\CC) 
-\mid
-\text{$\Im\ckf$ contains a K\"{a}hler metric}
-\}
-\\
-&\phantom{:}= \coho{1,1}(X,\RR) \oplus i C_{\RR}(X).
-\end{align*}
-Note that we haven't quotiented the real part by $\coho{1,1}(X,\RR)$.
-We leave to the reader to check that all our calculations work verbatim
-after taking this quotient; we only omit it out of notational laziness. 
-
-
-As in the real case, each Kahler class $\kf = \Im \ckf$ defines a
-Hermitian inner product on the tangent space $T_{\ckf} \CKC$, so we get
-a smooth Hermitian metric $h$ on the complexified Kahler cone. As in the
-Riemannian case, we easy prove the following.
-
-
-\begin{prop}
-Let $\ton,\ttw$ be elements of $T_C$ at a point $\ckf$. Let $\kf =
-\Im\ckf$ and let $\Lef$ be the adjoint of the Lefschetz operator that
-$\kf$ defines.  The Hermitian metric on $C$ can be defined in any of the
-following ways.
-\begin{enumerate}
-    \item 
-$$
-h(\ton, \ttw)
-= \q{\ton} \cdot \q{\ov{\ttw}}
-- \qq{\ton}{\ov\ttw}.
-$$
-    \item
-\hfil
-$
-h(\ton,\ttw)
-= \Lef(\ton)\Lef(\ov\ttw)
-- \Lef\^2(\ton\wedge\ov\ttw).
-$
-\hfil
-    \item
-The metric is the Hermitian form associated to 
-$-4\d\dbar\frac{i}{2}\Vol$, where $\Vol : C \to \RR$, $\ckf \mapsto
-\Vol(X,\Im\ckf)$.
-\end{enumerate}
-It follows that this Hermitian metric is a K\"{a}hler metric.
-\end{prop}
-
-
-
-Remark that there is an obvious smooth inclusion $\KC \hookrightarrow \CKC$
-and a smooth submersion $\Im : \CKC \to \KC$.
-
-\begin{prop}
-The following are true.
-\begin{enumerate}
-    \item 
-$\KC$ is a totally geodesic, totally real minimal Riemannian submanifold
-of $\CKC$.  
-    \item 
-$\Im: \CKC \to \KC$ is a Riemannian submersion.
-\end{enumerate}
-\end{prop}
-
-\begin{proof}
-The inclusion $\KC \hookrightarrow \CKC$ makes $\KC$ into a Riemann
-submanifold because of how we defined the complexified metric. The
-submanifold $\KC \subset \CKC$ is also fixed by the smooth isometric
-involution $\ckf \mapsto -\ov\ckf$ of the complexified K\"{a}hler cone;
-it is thus a totally geodesic submanifold of $\CKC$. It is totally real
-by inspection, and minimal because it is totally geodesic.
-
-For the second claim, calculate. Actually, calculate for the first claim
-as well to check that the coefficients are the right ones.
-\end{proof}
-
-
-These properties come in handy because, as we saw, it is quite tricky to
-bound the sectional curvature of the metric on the Kahler cone from
-below. However, the holomorphic structure of the complexified Kahler
-cone and the fact that we have a Kahler metric there results in a
-nice expression for the Chern curvature tensor which does admit a good
-lower bound. Some elementary algebra combined with the Riemannian
-submersion then yield a (probably nonoptimal) lower bound on the
-sectional curvatures of the Kahler cone.
-
-
-
-\subsection*{The Chern connection and curvature form}
-
-The Chern connection on a holomorphic vector bundle with a Hermitian
-metric $h$ is the unique connection that is compatible with the metric
-and whose $(0,1)$-part is $\dbar$; that is, it satisfies
-$$
-d h(\ton, \ov{\ttw}) 
-= h(\chern \ton, \ov{\ttw}) + h(\ton, \ov{\chern \ttw}),
-\quad
-\chern^{0,1} = \dbar
-$$
-for all sections $u, v$ of the bundle.
-
-
-\begin{prop}
-\label{prop:chernconnection}
-The Chern connection of the K\"{a}hler metric on $\KC$ is
-$$
-\chern \ton
-= d\ton 
-- \Lef(\d \kf) \, \ton
-- \Lef(\ton) \, \d\kf 
-+ \Lef(\ton \cup \d\kf).
-$$
-\end{prop}
-
-
-\begin{proof}
-It's enough to calculate the Chern connection on local holomorphic
-vector fields, so let $\ton, \ttw$ be thus. Then the Chern connection
-satisfies
-$$
-\d h(\ton,\ov\ttw)
-= h(\chern^{1,0}\ton, \ov\ttw).
-$$
-We have
-$$
-h(\ton,\ov\ttw)
-= \Lef(\ton) \Lef(\ov\ttw) - \Lef\^2(\ton \cup \ov\ttw)
-$$
-and we remark that $d_{\tth} \kf = \frac{1}{2i} \tth$.
-Then
-$$
-\displaylines{
-\d_{\tth} h(\ton,\ov\ttw)
-= -2 \tfrac{1}{2i} \Lef(\tth) \Lef(\ton) \Lef(\ov\ttw)
-+ \Lef(\d_{\tth}\ton) \Lef(\ov\ttw)
-\hfill\cr\hfill{}
-+ \tfrac{1}{2i} \Lef\^2(\tth \cup \ton) \Lef(\ov\ttw)
-+ \tfrac{1}{2i} \Lef\^2(\tth \cup \ov\ttw)\Lef(\ov\ttw)
-+ \tfrac{1}{2i} \Lef(\tth) \Lef\^2(\ton \cup \ov\ttw)
-\cr\hfill{}
-- \Lef\^2(\d_{\tth}\ton \cup \ov\ttw)
-- \tfrac{1}{2i} \Lef\^3(\tth \cup \ton \cup \ov\ttw).
-\cr{}
-\phantom{\d_{\tth} h(\ton,\ov\ttw)}
-= h(\d_{\tth}\ton, \ttw)
-- h(\tfrac{1}{2i} \Lef(\tth) \ton, \ttw)
-- h(\Lef(\ton) \tfrac{1}{2i}\tth, \ttw)
-+ h(\ton \cup \tfrac{1}{2i} \tth, \ttw)
-\hfill
-}
-$$
-because 
-$$
-h(\ton \cup \tfrac{1}{2i} \tth, \ttw)
-= \tfrac{1}{2i} \Lef\^2(\tth \cup \ton) \Lef(\ov\ttw)
-- \tfrac{1}{2i} \Lef\^3(\tth \cup \ton \cup \ov\ttw),
-$$
-and this is equal to the announced expression.
-\end{proof}
-
-
-\begin{lemm}
-\label{coro:kahlerform}
-$\chern^{1,0} \kf = -\d\kf$.
-\end{lemm}
-
-
-\begin{proof}
-Let $\ton$ be a tangent field on $\KC$ and consider the equation
-$\langle \ton, \kf \rangle = \Lef \ton$. Upon differentiating this in
-the direction of $\ttw$ we get
-$$
-\langle \chern_{\ttw}\ton, \kf \rangle 
-+ \langle \ton, \chern_{\ttw}\kf \rangle 
-= (d_{\ttw}\Lef) \ton
-+ \Lef d_{\ttw}\ton
-= \tfrac{1}{2}i \langle \ton, \ttw\rangle
-+ \Lef d_{\ttw}\ton.
-$$
-Proposition~\ref{prop:chernconnection} now gives
-$$
-\displaylines{
-\langle \chern_{\ttw}\ton, \kf \rangle 
-=
-\Lef(d_{\ttw}\ton)
-- i\Lef\ton\cdot \Lef\ttw
-+ i\Lef\^2(\ton \wedge \ttw)
-}
-$$
-so
-\begin{align*}
-\langle \ton, \chern_{\ttw}\kf \rangle
-&=
--\tfrac{1}{2}i \Lef\ton \cdot \Lef \ttw
-+\tfrac12 i \Lef\^2(\ton \wedge \ttw)
-+ i\Lef\ton\cdot \Lef\ttw
-- i\Lef\^2(\ton \wedge \ttw)
-\\
-&=
-\langle \ton, -\tfrac{1}{2i} \ttw \rangle
-= \langle \ton, -\d\kf(\ttw) \rangle.
-\qedhere
-\end{align*}
-\end{proof}
-
-
-\begin{theo}
-The curvature tensor of the K\"{a}hler metric on $\KC$ is
-\begin{equation*}
-R(\ton,\ov\ttw,\tth,\ov\tfo)
-= - \tfrac14 h(\ton,\ov\ttw)\, h(\tth,\ov\tfo)
-- \tfrac14 h (\ton,\ov\tfo)\, h(\tth,\ov\ttw)
-+ \tfrac14 \langle \ton \wedge \tth, \ov{\ttw\wedge\tfo} \rangle.
-\end{equation*}
-\end{theo}
-
-
-\begin{proof}
-Let $\ton$ be a local holomorphic section of the tangent bundle of $\KC$.
-By definition, we have $\curv = \chern^2$ and since our connection is
-Hermitian, we get $\curv = \dbar \chern$ on holomorphic sections.
-Note that since $\kf = \Im \alpha$, we have $\d\dbar \kf = 0$.
-Proposition~\ref{prop:chernconnection} and
-Lemma~\ref{coro:kahlerform} now give
-\begin{align*}
-\dbar_{\ov\tfo} \chern_{\tth} \ton
-&=
-- \tfrac{1}{2i} \langle \tth,\ov{\chern^{1,0}_{\tfo}\kf} \rangle\, \ton
-- \tfrac{1}{2i} \langle \ton, \ov{\chern^{1,0}_{\tfo}\kf} \rangle\, \tth
-+ \tfrac{1}{2i} \dbar(\Lambda(\ton \wedge \tth))
-\\
-&=
-- \tfrac{1}{4} \langle \tth,\ov{\tfo} \rangle\, \ton
-- \tfrac{1}{4} \langle \ton, \ov{\tfo} \rangle\, \tth
-+ \tfrac{1}{2i} \dbar(\Lambda(\ton \wedge \tth)).
-\end{align*}
-Upon taking the inner product with $\ttw$, we then get
-$$
-R(\ton,\ov\ttw,\tth,\ov\tfo)
-= -\tfrac14
-\langle \ton, \ov\ttw \rangle
-\langle \tth,\ov{\tfo} \rangle
--\tfrac14
-\langle \ton, \ov{\tfo} \rangle
-\langle \tth, \ov\ttw \rangle
-+ \tfrac{1}{4} \langle \ton \wedge \tth, \ov{\ttw \wedge \tfo}\rangle.
-\qedhere
-$$
-\end{proof}
-
-
-\begin{proof}[Alternate proof]
-Let $\ton,\ttw,\tth,\tfo$ be local holomorphic sections of the tangent
-bundle of $\KC$.  By definition, we have $\curv = \chern^2$ and since
-our connection is the Chern connection, we get $\curv = \dbar \chern$ on
-holomorphic sections. Proposition~\ref{prop:chernconnection} now gives
-\begin{align*}
-\dbar_{\ov\tfo} \chern_{\tth} \ton
-&=
-\dbar_{\ov\tfo} \d_{\tth}\ton
-- \tfrac{1}{2i} ((\dbar_{\ov\tfo}\Lef) \tth)\ton
-- \tfrac{1}{2i} ((\dbar_{\ov\tfo}\Lef) \ton)\tth
-+ \tfrac{1}{2i} (\dbar_{\ov\tfo}\Lef)(\ton\wedge\tth)
-\\
-&=
-- \tfrac{1}{4} \langle \tth,\ov{\tfo} \rangle\, \ton
-- \tfrac{1}{4} \langle \ton, \ov{\tfo} \rangle\, \tth
-+ \tfrac{1}{2i} (\dbar_{\ov\tfo}\Lef)(\ton \wedge \tth).
-\end{align*}
-Upon taking the inner product with $\ttw$, we then get
-$$
-R(\ton,\ov\ttw,\tth,\ov\tfo)
-= -\tfrac14
-\langle \ton, \ov\ttw \rangle
-\langle \tth,\ov{\tfo} \rangle
--\tfrac14
-\langle \ton, \ov{\tfo} \rangle
-\langle \tth, \ov\ttw \rangle
-+ \tfrac{1}{4} \langle \ton \wedge \tth, \ov{\ttw \wedge \tfo}\rangle.
-\qedhere
-$$
-\end{proof}
 
 
 

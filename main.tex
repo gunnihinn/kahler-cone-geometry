@@ -122,36 +122,70 @@ is complete.
 
 \section*{Introduction}
 
-Let $X$ be a compact K\"{a}hler manifold of complex dimension $n$. The
-Kahler cone of $X$ is the set of Kahler classes, that is,
-$(1,1)$-classes that contain a Kahler metric. Each Kahler class defines
-an inner product on the space of $(1,1)$-classes and letting the classes
-vary defines a natural Riemannian metric on the Kahler cone. 
+Let $X$ be a compact K\"{a}hler manifold of complex dimension $n$. The Kahler
+cone of $X$ is the set of Kahler classes, that is, $(1,1)$-classes that contain
+a Kahler metric. Each Kahler class defines an inner product on the space of
+$(1,1)$-classes and letting the classes vary defines a natural Riemannian metric
+on the Kahler cone. 
 
 This metric has been studied by Wilson~\cite{Wilson}, Wilson and
-Trenner~\cite{WilsonTrenner} and myself~\cite{Magnusson}, sometimes by
-embedding the Kahler cone into the space of smooth Hermitian metrics on
-the manifold via the Aubin--Calabi--Yau theorem and using the natural
-$L^2$ metric defined on that infinite-dimensional space, and sometimes by working inside the cohomology ring. See also
-Huybrechts~\cite{Huybrechts} for another approach to the Kahler
-cone.
-TODO: Cite... Bogomolov?
+Trenner~\cite{WilsonTrenner} and myself~\cite{Magnusson}, sometimes by embedding
+the Kahler cone into the space of smooth Hermitian metrics on the manifold via
+the Aubin--Calabi--Yau theorem, and sometimes by working inside the cohomology
+ring.
 
-By working with smooth forms, one can compute the curvature tensor of this metric. The expression this yields does not descend to the level of cohomology, because it involves the wedge product of harmonic forms, and that product is usually not harmonic. It is also hard to work with, as one has to manipulate arbitrary Kahler metrics on an arbitrary Kahler manifold, where pretty much anything goes.
+By working with smooth forms, one can compute the curvature tensor of this
+metric. Wilson~\cite{Wilson} made one such approach, using very interesting
+tools that the author hasn't seen deployed since. The author~\cite{Magnusson}
+made another attempt, using the $L^2$ metric on the infinite-dimensional space
+of all K\"ahler metrics. Ultimately, the author cannot see that either approach
+descends again to the level of cohomology (at least in a way that makes the
+connection to the cohomology classes one started from obvious).
 
-Those working in the cohomology ring have obtained more complete results. Wilson~\cite{Wilson} did very interesting work in the cohomology ring of Calabi--Yau manifolds with tools largely specific to those manifolds, and Wilson and Trenner~\cite{WilsonTrenner} performed extensive computations in the cohomology of Calabi--Yau threefolds. Huybrechts~\cite{Huybrechts} focused his attention on the variation of primitive forms in the Kahler cone as the Kahler classes vary, which is very related to the metric we're interested in and its curvature. Bogomolov~\cite{Bogomolov} also considered this metric by starting from the intersection product in the cohomology ring (or as we'd see it in this paper, the volume classes of the Kahler classes) and computed its curvature. What unites these efforts in the cohomology ring is their fearlessness in picking convenient local bases to work in. Wilson, Trenner and Bogomolov all end up with local coordinate expressions for the curvature tensor of the metric. Huybrechts does not, but he doesn't compute the curvature tensor, for his sights are set elsewhere.
+Those working in the cohomology ring have obtained more complete results.
+Wilson and Trenner~\cite{WilsonTrenner} performed extensive computations in the
+cohomology of Calabi--Yau threefolds. Huybrechts~\cite{Huybrechts} focused his
+attention on the variation of primitive forms in the Kahler cone as the Kahler
+classes vary, which is very related to the metric we're interested in and its
+curvature. Totaro~\cite{totaro} also considered this metric in the more general
+setting of Hessian metrics arising from homogeneous polynomials.  What unites
+these efforts in the cohomology ring is their fearlessness in picking convenient
+local bases to work in. Wilson, Trenner and Totaro all end up with local
+coordinate expressions for the curvature tensor of the metric. Huybrechts does
+not, but he doesn't compute the curvature tensor, for his sights are set
+elsewhere.
 
-The starting point of this paper was a slight feeling of dissatisfaction with these local coordinate expressions, as the author felt he didn't really understand what was going on; didn't see the forest for the trees. In our treatment we thus stay entirely within the cohomology ring of an arbitrary compact Kahler manifold, and avoid picking coordinates at all. This shifts the difficulty from either previous approach from dealing with smooth forms or complicated polynomials to computing various cup products in the cohomology ring. Those turn out to be pleasantly manageable. For example,
-we're able to give explicit formulas for the geodesics of the metric
-(Theorem~\ref{theo:geodesics}) and say when it is complete, calculate
-its Levi-Civita connection, and say that its curvature tensor is
+The starting point of this paper was a slight feeling of dissatisfaction with
+these local coordinate expressions, as the author felt he didn't really
+understand what was going on; didn't see the forest for the trees. In our
+treatment we thus stay entirely within the cohomology ring of an arbitrary
+compact Kahler manifold, and avoid picking coordinates at all. This shifts the
+difficulty from either previous approach from dealing with smooth forms or
+complicated polynomials to computing various cup products in the cohomology
+ring. Those turn out to be pleasantly manageable. 
+
+The main novelty of this approach is that we obtain explicit and clear formulas
+for the Levi-Civita connection of the metric, and for its curvature tensor. For
+example, at a point $\kf$ with adjoint Lefschetz operator $\Lambda$, and for
+real $(1,1)$-classes $\ton, \ttw, \tth, \tfo$, the curvature tensor is
 $$
 R(\ton,\ttw,\tth,\tfo)
 =
 - \onfo \langle \Lef(\ton \cup \tfo), \Lef(\ttw \cup \tth) \rangle
 + \onfo \langle \Lef(\ton \cup \tth), \Lef(\ttw \cup \tfo) \rangle.
 $$
-However, that is where the good times end. We are unable to profit from these explicit formulas to improve on the previous general results on the curvature of the metric in any way. The main difficulty that frustrates us is plainly visible in the above formula: It involves the cup product in the cohomology ring of an arbitrary compact Kahler manifold, of which next to nothing can be said. To be able to compute the various derived tensors of the curvature tensor (the Ricci or scalar curvatues), or to estimate their magnitudes, one needs to be able to estimate the norm of the cup product of two classes in terms of the norms of the individual classes uniformely over the Kahler cone. As Wilson and Trenner show with an example, this is impossible in general; and the author knows of no conditions that one can impose on the manifolds under consideration that restrict the cohomology ring in suitable ways.
+However, that is where the good times end. We are unable to profit from these
+explicit formulas to improve on the previous general results on the curvature of
+the metric in any way. The main difficulty that frustrates us is plainly visible
+in the above formula: It involves the cup product in the cohomology ring of an
+arbitrary compact Kahler manifold, of which next to nothing can be said. To be
+able to compute the various derived tensors of the curvature tensor (the Ricci
+or scalar curvatues), or to estimate their magnitudes, one needs to be able to
+estimate the norm of the cup product of two classes in terms of the norms of the
+individual classes uniformely over the Kahler cone. As Wilson and Trenner show
+with an example, this is impossible in general; and the author knows of no
+conditions that one can impose on the manifolds under consideration that
+restrict the cohomology ring in suitable ways.
 
 
 

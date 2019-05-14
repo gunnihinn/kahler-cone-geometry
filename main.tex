@@ -10,7 +10,8 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{tikz}
 
-\title{Cohomological expression of the curvature of K\"{a}hler moduli}
+\title[Curvature of K\"ahler moduli]%
+{Cohomological expression of the curvature of K\"{a}hler moduli}
 \author{Gunnar Þór Magnússon}
 
 \newtheorem{theo}{Theorem}[section]
@@ -139,9 +140,9 @@ the metric in any way. The main difficulty that frustrates us is plainly visible
 in the above formula: It involves the cup product in the cohomology ring of an
 arbitrary compact K\"{a}hler manifold, of which next to nothing can be said. To be
 able to compute the various derived tensors of the curvature tensor (the Ricci
-or scalar curvatues), or to estimate their magnitudes, one needs to be able to
+or scalar curvatures), or to estimate their magnitudes, one needs to be able to
 estimate the norm of the cup product of two classes in terms of the norms of the
-individual classes uniformely over the K\"{a}hler cone. As Wilson and Trenner show
+individual classes uniformly over the K\"{a}hler cone. As Wilson and Trenner show
 with an example, this is impossible in general; and the author knows of no
 conditions that one can impose on the manifolds under consideration that
 restrict the cohomology ring in suitable ways.
@@ -165,9 +166,9 @@ The \emph{K\"{a}hler cone} of $X$ is the set
 If there can be no confusion about the underlying manifold $X$, we'll
 just write $\RKC$ for its K\"{a}hler cone.  As the name suggests, this is
 an open cones in the finite-dimensional vector space
-$\coho{1,1}(X,\RR)$. The K\"{a}hler cone is the trancendental analogue
-of the ample cone of a projective variety. It is described by the the
-trancendental version of the Nakai--Moishezon criteria due to Demailly
+$\coho{1,1}(X,\RR)$. The K\"{a}hler cone is the transcendental analogue
+of the ample cone of a projective variety. It is described by the
+transcendental version of the Nakai--Moishezon criteria due to Demailly
 and Paun~\cite{DemaillyPaun}:
 
 
@@ -187,7 +188,7 @@ inner product on the K\"{a}hler cone via the Hodge star operator, and these inne
 products vary smoothly with the underlying class.
 
 
-Let's agree on some notation before we find conventient expressions for
+Let's agree on some notation before we find convenient expressions for
 this metric. If $x$ is an element of the cohomology ring of $X$, we
 write $x\^k := x^k/k!$ for all $k \geq 0$. This notation is
 quite convenient for calculations with K\"{a}hler forms in the cohomology
@@ -208,7 +209,7 @@ $
 \hfil
 
     \item
-The quadradic form defined by the Hessian of $-\log\Vol$.
+The quadratic form defined by the Hessian of $-\log\Vol$.
 \end{enumerate}
 \end{prop}
 
@@ -237,7 +238,7 @@ $$
 \quad
 (t, \kf) \mapsto e^{t/n} \kf,
 $$
-where $\RR$ has the Euclidian metric and $C_1$ has the restriction of the metric
+where $\RR$ has the Euclidean metric and $C_1$ has the restriction of the metric
 on $C$. As a submanifold of $C$, the tangent space of $C_1$ at $\kf$ is the
 space of primitive $\kf$-classes.
 
@@ -633,7 +634,6 @@ $$
 + \half \langle \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
 \hfill\cr\hfill{}
 = 
-%-\Lef(\ton) \Lef\^3(\ttw \cup \tth \cup \tfo)
 -\Lef\^4(\ton \cup \ttw \cup \tth \cup \tfo)
 }
 $$
@@ -644,12 +644,6 @@ $$
 \half \langle (d_{\ton}\Lef)(\ttw \cup \tth), \tfo \rangle
 + \onfo \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
 \hfill\cr\hfill{}
-%- \half \Lef\^4(\ton \cup \ttw \cup \tth \cup \tfo)
-%- \onfo \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
-%\cr\hfill{}
-%- \onfo \langle \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle
-%+ \onfo \langle \Lef(\ton \cup \Lef(\ttw \cup \tth)), \tfo \rangle
-%\cr{}
 =- \half \Lef\^4(\ton \cup \ttw \cup \tth \cup \tfo)
 - \onfo \langle \Lef(\ttw \cup \tth), \Lef(\ton \cup \tfo) \rangle.
 }

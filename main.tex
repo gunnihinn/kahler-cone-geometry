@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{amsart}
+\documentclass[11pt,a4paper]{amsart}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -88,11 +88,11 @@ a K\"{a}hler metric. Each K\"{a}hler class defines an inner product on the space
 $(1,1)$-classes and letting the classes vary defines a natural Riemannian metric
 on the K\"{a}hler cone. 
 
-This metric has been studied by Wilson~\cite{Wilson}, Wilson and
-Trenner~\cite{WilsonTrenner} and myself~\cite{Magnusson}, sometimes by embedding
-the K\"{a}hler cone into the space of smooth Hermitian metrics on the manifold via
-the Aubin--Calabi--Yau theorem, and sometimes by working inside the cohomology
-ring.
+This metric has been studied by Wilson~\cite{Wilson}, Totaro~\cite{totaro},
+Wilson and Trenner \cite{WilsonTrenner} and the author~\cite{Magnusson},
+sometimes by embedding the K\"{a}hler cone into the space of smooth Hermitian
+metrics on the manifold via the Aubin--Calabi--Yau theorem, and sometimes by
+working inside the cohomology ring.
 
 By working with smooth forms, one can compute the curvature tensor of this
 metric. Wilson~\cite{Wilson} made one such approach, using very interesting
@@ -117,10 +117,10 @@ elsewhere.
 
 The starting point of this paper was a slight feeling of dissatisfaction with
 these local coordinate expressions, as the author felt he didn't really
-understand what was going on; didn't see the forest for the trees. In our
-treatment we thus stay entirely within the cohomology ring of an arbitrary
-compact K\"{a}hler manifold, and avoid picking coordinates at all. This shifts the
-difficulty from either previous approach from dealing with smooth forms or
+understand what was going on; that he didn't see the forest for the trees. In
+our treatment we thus stay entirely within the cohomology ring of an arbitrary
+compact K\"{a}hler manifold, and avoid picking coordinates at all. This shifts
+the difficulty from either previous approach from dealing with smooth forms or
 complicated polynomials to computing various cup products in the cohomology
 ring. Those turn out to be pleasantly manageable. 
 
@@ -264,20 +264,20 @@ number, but there exists a proper irreducible complex subspace $Z
 \end{enumerate}
 
 Let us conspire to call $\mathcal{P} := \{\kf \in \coho{1,1}(X,\RR) \mid \kf\^n
-> 0\}$ the cone of volume classes on $X$. It contains the K\"{a}hler cone, but
-is in almost all cases bigger than it.
+> 0\}$ the cone of volume classes on $X$. One of its connected components
+contains the K\"{a}hler cone, but is in almost all cases bigger than it.
 
 \begin{prop}
 \label{prop:fofo}
-The metric on the K\"{a}hler cone of $X$ is complete if and only if cone is a
-connected component of the volume cone.
+The metric on the K\"{a}hler cone of $X$ is complete if and only if the
+K\"{a}hler cone is a connected component of the volume cone.
 \end{prop}
 
 \begin{proof}
 We first show that the classes on the first two parts of the boundary
 pose no problems. Let $I$ be an interval in the real numbers and let
 $\gamma : I \to \RKC$ be a smooth path in $\RKC$ that approaches the
-boundary of $\RKC$. Let $I_m = [a, b_m]$ be an increasing exhaustion
+boundary of $\RKC$. Let $I_m = [a_m, b_m]$ be an increasing exhaustion
 of $I$ by compact intervals and let $\gamma_m$ be the restriction
 of $\gamma$ to $I_m$. Suppose that the volume $\Vol(X,\gamma_m)$
 tends to either zero or infinity as $m$ tends to infinity.
@@ -300,7 +300,7 @@ We apply the Cauchy--Schwarz inequality to the scalar product
 $\langle\ton,\kf\rangle$; this gives
 $$
 |d_\ton \log \Vol(X,\kf)|^2 
-= |\tfrac{1}{2}\langle\ton,\kf\rangle|^2 \leq \tfrac{n}{2} \rangle\ton,\ton\rangle.
+= |\tfrac{1}{2}\langle\ton,\kf\rangle|^2 \leq \tfrac{n}{2} \langle\ton,\ton\rangle.
 $$
 Integrating and applying the triangle inequality then gives the
 announced estimate.

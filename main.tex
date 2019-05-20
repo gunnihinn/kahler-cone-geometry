@@ -660,18 +660,6 @@ as promised.
 \end{proof}
 
 
-\begin{rema}
-This expression for the curvature tensor suggests that we could investigate the
-operation $(\ton, \ttw) \mapsto \half \Lef(\ton \cup \ttw)$ to understand the
-curvature of the metric. This operation defines an algebra structure on
-$\coho{1,1}(X,\RR)$; as an algebra, it is commutative, non-associative and
-non-unital (if it had a unit, it would have to be a multiple of $\kf$, which
-doesn't work). This algebra structure varies as the K\"{a}hler class $\kf$ varies.
-Beyond that, it's not clear what one can say about these structures in any
-generality.
-\end{rema}
-
-
 
 \begin{rema}
 If $x,y$ are $(2,2)$-classes, then 
@@ -706,6 +694,93 @@ impossible by Wilson and Trenner's example~\cite{WilsonTrenner}.
 
 
 
+\subsection*{On algebraic curvature tensors}
+
+The expression for the curvature tensor suggests that we could investigate the
+operation $(\ton, \ttw) \mapsto \half \Lef(\ton \cup \ttw)$ to understand the
+curvature of the metric. This operation defines an algebra structure on
+$\coho{1,1}(X,\RR)$; as an algebra, it is commutative, non-associative and
+non-unital (if it had a unit, it would have to be a multiple of $\kf$, which
+doesn't work). This algebra structure varies as the K\"{a}hler class $\kf$ varies.
+Beyond that, it's not clear what one can say about these structures in any
+generality.
+
+This curvature tensor conforms to a form of algebraic curvature tensors that, as far as the author knows, have not received much attention:
+
+\begin{prop}
+Let $V$ be a real vector space, equipped with an inner product $\langle \ ,\,\rangle$, and an algebra structure $(x,y) \mapsto x\cdot y$. If the algebra structure is commutative, then
+$$
+R(x,y,z,w) := \langle x \cdot w, y \cdot z \rangle - \langle x \cdot z, y \cdot w \rangle
+$$
+is an algebraic curvature tensor.
+\end{prop}
+
+\begin{proof}
+  It is immediate that $R(y,x,z,w) = R(x,y,w,z) = -R(x,y,z,w)$. The commutativity entails that $R(z,w,x,y) = R(x,y,z,w)$, so $R$ defines a symmetric bilinear form on $\bigwedge^2V$. The commutativity also entails that $R$ satisfies the Bianchi identity
+  $$
+  \displaylines{\hfill
+  R(x,y,z,w) + R(y,z,x,w) + R(z,x,y,w) = 0.
+  \hfill
+  \qedhere
+  }
+  $$
+\end{proof}
+
+The moral of this proposition is perhaps that one should not expect to be able to prove very much about our curvature tensor from formal properties alone. By resorting to the algebra structure constants, or by coordinate-free manipulations, one can write down equations for the Ricci and scalar curvatures of these tensors. The various classical conditions one can then impose -- that the tensor have constant sectional curvature, be an Einstein tensor, or have zero scalar curvature -- do not seem to impose interesting restrictions on the algebra structure.
+
+Recall that a derivation $D$ of an algebra is a linear map on the underlying vector space such that $D(x \cdot y) = Dx \cdot y + x \cdot Dy$ for all vectors $x,y$. The derivations of an algebra on $V$ form a subalgebra of $\End V$. One can constrain them a little by formal manipulations in the case of our algebra:
+
+
+
+
+
+\begin{prop}
+If $D$ is a derivation of the algebra on $\coho{1,1}(X,\mathbb{R})$, then $D\omega = 0$, $Dx$ is primitive for all $x$, and $D^t = -D$.
+\end{prop}
+
+\begin{proof}
+We have $[L, \Lambda] = (2-n)\id$ on $(1,1)$-forms. We can interpret this as a statement about the algebra product of a class with $\omega$:
+$$
+x \cdot \omega
+= \tfrac12 \Lambda(x) \omega + \tfrac12 (n-2) x.
+$$
+We have $\omega \cdot \omega = (n-1) \omega$. Then
+$$
+(n-1) D\omega
+= 2 D\omega \cdot \omega
+= \Lambda(D\omega) \, \omega + n D\omega.
+$$
+Then
+$$
+D\omega = -\Lambda(D\omega) \, \omega,
+$$
+that is, $D\omega$ is a multiple of $\omega$.
+
+Suppose that $u$ is primitive. Then $u \cdot \omega = \tfrac12 (n-2) u$. We get
+\begin{align*}
+\tfrac12 (n-2) Du
+&= Du \cdot \omega + u \cdot D\omega
+\\
+&= \tfrac12 \Lambda(Du) \, \omega 
++ \tfrac12 (n-2) Du
+ + \Lambda(D\omega) \tfrac12 (n-2) u,
+\end{align*}
+That is,
+$$
+\Lambda(Du) \, \omega + (n-2) \Lambda(D\omega) \, u = 0.
+$$
+As $\omega$ and $u$ are orthogonal, the only way this can hold is if $\Lambda(Du) = \Lambda(D\omega) = 0$. Then we also get $D\omega = 0$.
+
+It follows that $Dx$ is primitive for any $(1,1)$-class $x$. For primitive classes $u$ and $v$, we have
+$$
+D(u \cdot v) = Du \cdot v + u \cdot Dv.
+$$
+Note that if either $u$ or $v$ is a primitive class, then $\Lambda(u \cdot v) = -\langle u, v \rangle$. From the above, it follows that
+$$
+\langle Du, v \rangle + \langle u, Dv \rangle = 0,
+$$
+so the linear morphism $D$ satisfies $D^t = -D$.
+\end{proof}
 
 
 

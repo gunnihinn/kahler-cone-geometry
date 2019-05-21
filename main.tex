@@ -14,6 +14,7 @@
 {Cohomological expression of\\
 the curvature of K\"{a}hler moduli}
 \author{Gunnar Þór Magnússon}
+\thanks{Email: \texttt{gunnar@magnusson.io}}
 
 \newtheorem{theo}{Theorem}[section]
 \newtheorem{prop}[theo]{Proposition}
@@ -702,10 +703,8 @@ curvature of the metric. This operation defines an algebra structure on
 $\coho{1,1}(X,\RR)$; as an algebra, it is commutative, non-associative and
 non-unital (if it had a unit, it would have to be a multiple of $\kf$, which
 doesn't work). This algebra structure varies as the K\"{a}hler class $\kf$ varies.
-Beyond that, it's not clear what one can say about these structures in any
-generality.
 
-This curvature tensor conforms to a form of algebraic curvature tensors that, as far as the author knows, have not received much attention:
+This curvature tensor conforms to a form of algebraic curvature tensors that, as far as the author knows, have not received much attention. We gather here some trivialities about them, the first of which suggests this will not be a fertile line of investigation.
 
 \begin{prop}
 Let $V$ be a real vector space, equipped with an inner product $\langle \ ,\,\rangle$, and an algebra structure $(x,y) \mapsto x\cdot y$. If the algebra structure is commutative, then
@@ -718,7 +717,9 @@ is an algebraic curvature tensor.
 \begin{proof}
   It is immediate that $R(y,x,z,w) = R(x,y,w,z) = -R(x,y,z,w)$. The commutativity entails that $R(z,w,x,y) = R(x,y,z,w)$, so $R$ defines a symmetric bilinear form on $\bigwedge^2V$. The commutativity also entails that $R$ satisfies the Bianchi identity
   $$
-  \displaylines{\hfill
+  \displaylines{
+    \phantom{\qedsymbol}
+    \hfill
   R(x,y,z,w) + R(y,z,x,w) + R(z,x,y,w) = 0.
   \hfill
   \qedhere
@@ -726,12 +727,69 @@ is an algebraic curvature tensor.
   $$
 \end{proof}
 
-The moral of this proposition is perhaps that one should not expect to be able to prove very much about our curvature tensor from formal properties alone. By resorting to the algebra structure constants, or by coordinate-free manipulations, one can write down equations for the Ricci and scalar curvatures of these tensors. The various classical conditions one can then impose -- that the tensor have constant sectional curvature, be an Einstein tensor, or have zero scalar curvature -- do not seem to impose interesting restrictions on the algebra structure.
+The moral of this proposition is perhaps that one should not expect to be able to prove very much about our curvature tensor from formal properties alone. After all, the commutative algebra structures on a vector space of dimension $h^{1,1}$ form a vector space of dimension $(h^{1,1})^2(h^{1,1}+1)/2$, while we can at best expect to generate a space of dimension $h^{1,1}$ therein by deforming our K\"ahler classes. Without any way of distinguishing the structures defined by a K\"ahler class (if any) from the others, and without this class of curvature tensors having some special properties, there is then little hope of progress in this direction.
+
+Recall that if $b$ is a symmetric bilinear form on $V$, then the Kulkarni--Nomizu product of $b$ is the algebraic curvature tensor defined as
+$$
+(b \wedge b)(x,y,z,w)
+= b(x,z)b(y,w) - b(x,w)b(y,z).
+$$
+
+\begin{prop}
+A curvature tensor defined by an algebra is a sum of Kulkarni--Nomizu products.
+\end{prop}
+
+\begin{proof}
+Let $(x_1,\ldots,x_n)$ be an orthonormal basis of $V$. Define bilinear forms $b_l(x,y) := \langle x \cdot y, x_l \rangle$. These are symmetric as the algebra is symmetric, and satisfy $x \cdot y = \sum_{l=1}^n b_l(x,y) x_l$. It follows that
+$$
+\displaylines{
+  \phantom{\qedsymbol}
+  \hfill
+  R(x,y,z,w) = -\sum_{l=1}^n (b_l \wedge b_l)(x,y,z,w).
+  \hfill
+  \qedhere
+}
+$$
+\end{proof}
+
+
+The curvature tensors of our algebra structures are made up of symmetric bilinear forms on $S^2V$.
+If $x, y$ are vectors in $V$, we'll write $xy$ for the induced vector $\frac12(x \otimes y + y \otimes x)$ in $S^2V$. The inner product on $V$ induces an inner product on $S^2V$ by
+$$
+\langle xy, zw \rangle
+=
+\tfrac12
+\bigl(
+\langle x, z \rangle \langle y, w \rangle
++ \langle x, w \rangle \langle y, z \rangle
+\bigr).
+$$
+We'll say that an algebraic curvature tensor has constant sectional curvature if it is equal to a multiple of the Kulkarni--Nomizu product of an inner product.
+
+\begin{prop}
+An algebraic curvature tensor induced by an algebra structure has constant sectional curvature if and only if there exists a scalar $\lambda$ and a symmetric $4$-tensor $A$ such that
+$$
+\langle x \cdot y, z \cdot w \rangle
+= 2\lambda \langle xy, zw \rangle + A(x,y,z,w)
+$$
+for all vectors $x,y,z,w \in V$.
+\end{prop}
+
+\begin{proof}
+  If this condition holds, it is a simple computation to show that the curvature tensor defined by the algebra has constant sectional curvature $-\lambda$ with our sign choices.
+
+  Conversely, if the curvature tensor has constant sectional curvature $-\lambda$, the symmetries of the curvature tensor entail that the linear form
+$$
+A(x,y,z,w) := \langle x \cdot w, y \cdot z \rangle - 2\lambda \langle xw, yz \rangle
+$$
+is symmetric.
+\end{proof}
+
+
+
+
 
 Recall that a derivation $D$ of an algebra is a linear map on the underlying vector space such that $D(x \cdot y) = Dx \cdot y + x \cdot Dy$ for all vectors $x,y$. The derivations of an algebra on $V$ form a subalgebra of $\End V$. One can constrain them a little by formal manipulations in the case of our algebra:
-
-
-
 
 
 \begin{prop}

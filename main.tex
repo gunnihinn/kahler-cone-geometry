@@ -843,6 +843,79 @@ so the linear morphism $D$ satisfies $D^t = -D$.
 
 
 
+\section{Examples}
+
+
+We collect here the examples we know about of the metric on the K\"ahler cone.
+
+\begin{exam}[Trivial]
+If $X$ is a compact K\"ahler manifold with $h^{1,1} = 1$, then the K\"ahler cone
+of $X$ is isometric to the real line with the Euclidean metric.
+\end{exam}
+
+
+\begin{exam}[Surfaces]
+Let $X$ be a compact K\"ahler surface. If $\kf$ is a K\"ahler class and $\ton$
+and $\ttw$ are primitive $(1,1)$-classes, then $\ton \cup \ttw = -\langle \ton,
+\ttw \rangle \kf\^{2}$, so 
+$$
+\Lambda(\ton \cup \ttw)
+= - \langle \ton, \ttw \rangle \kf.
+$$
+The curvature tensor is then a Kulkarni--Nomizu product of the metric tensor, so
+the metric has constant sectional curvature $-1/2$.
+
+TODO: Find curvature tensor explicitly.
+\end{exam}
+
+
+\begin{exam}[Tori]
+Let $X = \CC^n / \Gamma$ be a complex torus. The K\"ahler classes on $X$
+identify with the Hermitian positive-definite matrices on $\CC^n$. If $\kf$
+is such a matrix, the metric tensor at $\kf$ is
+$$
+g(\ton, \ttw) = \tr(\kf^{-1} \ton \kf^{-1} \ttw^t).
+$$
+The general linear group acts transitively on the space of Hermitian
+positive-definite matrices by $A \cdot \kf = A \kf A^t$. This action doesn't
+preserve the volume function, but it preserves the Hessian of $\log \Vol$, so
+the K\"ahler cone of a complex torus is a symmetric space.
+
+TODO: Find curvature tensor explicitly.
+
+TODO: Find curvature tensor with our formula.
+
+TODO: Check that the 2-torus has the same curvature tensor.
+\end{exam}
+
+
+\begin{exam}[Blowup of trivial case]
+Let $X$ be a compact K\"ahler manifold of dimension $n > 1$ and let $\tilde X$
+be the blowup of $X$ in $m$ points.
+
+TODO: Find curvature tensor explicitly.
+
+TODO: Find curvature tensor with our formula.
+\end{exam}
+
+
+\begin{exam}[Hyperk\"ahler manifolds]
+They have constant sectional curvature after Wilson.
+\end{exam}
+
+
+\begin{exam}[Wilson and Trenner's example]
+Can we compute the curvature tensor in their example?
+\end{exam}
+
+
+\begin{exam}[Grassmannian or flag manifolds]
+We can maybe describe their cohomology well enough to compute their curvature?
+\end{exam}
+
+
+
+
 \bibliographystyle{alpha}
 \bibliography{main}
 
